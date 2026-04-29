@@ -1,0 +1,28 @@
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.sep {
+  color: var(--border-hover);
+}
+
+.email {
+  transition: color var(--transition);
+}
+
+.email:hover {
+  color: var(--accent-light);
+}

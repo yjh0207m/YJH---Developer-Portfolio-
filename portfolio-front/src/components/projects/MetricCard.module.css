@@ -1,0 +1,21 @@
+.card {
+  padding: 24px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-light);
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}

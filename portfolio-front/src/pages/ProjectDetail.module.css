@@ -1,0 +1,257 @@
+.page {
+  padding-top: var(--nav-height);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
+}
+
+.notFound {
+  padding-top: calc(var(--nav-height) + 80px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.backLink {
+  color: var(--accent-light);
+  font-size: 0.9rem;
+  transition: opacity var(--transition);
+}
+
+.backLink:hover {
+  opacity: 0.75;
+}
+
+/* ─── Breadcrumb ─── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.breadLink {
+  color: var(--accent-light);
+  transition: opacity var(--transition);
+}
+
+.breadLink:hover {
+  opacity: 0.75;
+}
+
+.breadSep {
+  color: var(--text-muted);
+}
+
+.breadCurrent {
+  color: var(--text-secondary);
+}
+
+/* ─── Header ─── */
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.metaDot {
+  color: var(--border-hover);
+}
+
+/* ─── Tech Stack Groups ─── */
+.techGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.techGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.techGroupLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 5px;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.techGroupTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.tag {
+  font-size: 0.8rem;
+  color: var(--accent-light);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ─── Screenshot Placeholder ─── */
+.screenshotPlaceholder {
+  width: 100%;
+  height: 280px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 48px;
+}
+
+/* ─── Sections ─── */
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.975rem;
+}
+
+/* ─── Metrics ─── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ─── Links ─── */
+.links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  align-items: center;
+}
+
+.btnPrimary {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.btnPrimary:hover {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+.btnSecondary {
+  padding: 10px 24px;
+  border: 1px solid var(--border-hover);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.btnSecondary:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.btnBack {
+  margin-left: auto;
+  padding: 10px 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.btnBack:hover {
+  color: var(--text-secondary);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .container {
+    padding: 32px 16px 0;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshotPlaceholder {
+    height: 200px;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    text-align: center;
+  }
+
+  .btnBack {
+    margin-left: 0;
+    text-align: center;
+  }
+}

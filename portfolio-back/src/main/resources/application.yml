@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: portfolio-back
+
+  datasource:
+    url: jdbc:mariadb://192.168.0.228:3306/portfolio
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  sql:
+    init:
+      mode: never          # schema.sql → data.sql 순서로 항상 실행
+
+  jpa:
+    hibernate:
+      ddl-auto: none        # 스키마는 schema.sql 에서 관리
+    show-sql: false
+    open-in-view: false
+    defer-datasource-initialization: false  # SQL 스크립트 먼저, JPA 나중
+    properties:
+      hibernate:
+        format_sql: false
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  tomcat:
+    max-http-form-post-size: -1
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html
+  api-docs:
+    path: /v3/api-docs
+
+mail:
+  to: yjh0207m@naver.com
