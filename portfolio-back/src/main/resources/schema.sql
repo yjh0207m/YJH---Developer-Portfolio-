@@ -186,11 +186,12 @@ CREATE TABLE project_metrics (
 -- 12. highlights  (홈 Highlights 카드)
 -- ============================================================
 CREATE TABLE highlights (
-    id        BIGINT       NOT NULL AUTO_INCREMENT,
-    value     VARCHAR(50)  NOT NULL  COMMENT '수치 (예: 40초)',
-    label     VARCHAR(100) NOT NULL  COMMENT '항목명',
-    sub       VARCHAR(200)           COMMENT '설명',
-    order_num INT                    COMMENT '표시 순서',
+    id            BIGINT       NOT NULL AUTO_INCREMENT,
+    value         VARCHAR(50)  NOT NULL DEFAULT '' COMMENT '수치 (computed_type 있으면 무시됨)',
+    label         VARCHAR(100) NOT NULL  COMMENT '항목명',
+    sub           VARCHAR(200)           COMMENT '설명',
+    order_num     INT                    COMMENT '표시 순서',
+    computed_type VARCHAR(30)            COMMENT 'PROJECT_COUNT 등 — 값을 런타임에 계산',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

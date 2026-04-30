@@ -6,6 +6,7 @@ import com.yjh.portfolio.repository.CertificationRepository;
 import com.yjh.portfolio.repository.EducationRepository;
 import com.yjh.portfolio.repository.HighlightRepository;
 import com.yjh.portfolio.repository.MilitaryRepository;
+import com.yjh.portfolio.repository.ProjectRepository;
 import com.yjh.portfolio.repository.TechSkillRepository;
 import com.yjh.portfolio.repository.TrainingRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +29,7 @@ public class ResumeController {
     private final AwardRepository awardRepository;
     private final TechSkillRepository techSkillRepository;
     private final HighlightRepository highlightRepository;
+    private final ProjectRepository projectRepository;
 
     public ResumeController(
             EducationRepository educationRepository,
@@ -36,7 +38,8 @@ public class ResumeController {
             TrainingRepository trainingRepository,
             AwardRepository awardRepository,
             TechSkillRepository techSkillRepository,
-            HighlightRepository highlightRepository) {
+            HighlightRepository highlightRepository,
+            ProjectRepository projectRepository) {
         this.educationRepository = educationRepository;
         this.militaryRepository = militaryRepository;
         this.certificationRepository = certificationRepository;
@@ -44,6 +47,7 @@ public class ResumeController {
         this.awardRepository = awardRepository;
         this.techSkillRepository = techSkillRepository;
         this.highlightRepository = highlightRepository;
+        this.projectRepository = projectRepository;
     }
 
     @Operation(summary = "이력서 전체 데이터 조회")
@@ -91,8 +95,14 @@ public class ResumeController {
     @GetMapping("/highlights")
     @Transactional(readOnly = true)
     public List<Map<String, String>> getHighlights() {
+        long projectCount = projectRepository.count();
         return highlightRepository.findAllByOrderByOrderNumAsc().stream()
-                .map(h -> Map.of("value", h.getValue(), "label", h.getLabel(), "sub", h.getSub() != null ? h.getSub() : ""))
+                .map(h -> {
+                    String value = "PROJECT_COUNT".equals(h.getComputedType())
+                            ? projectCount + "개"
+                            : h.getValue();
+                    return Map.of("value", value, "label", h.getLabel(), "sub", h.getSub() != null ? h.getSub() : "");
+                })
                 .toList();
     }
 

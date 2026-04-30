@@ -117,7 +117,14 @@ INSERT INTO projects (id, title, description, period, start_date, end_date,
     '2025.11 – 2026.04', '2025-11-01', '2026-04-30',
     '개발', '팀협동',
     'RPA 자동화를 통해 반복 업무를 제거하는 것이 실질적인 업무 효율 개선으로 이어진다는 점을 체감했습니다.',
-    '', '', '/ppt/accounting_rpa.pdf', 5);
+    '', '', '/ppt/accounting_rpa.pdf', 5),
+
+(6, '개발자 포트폴리오',
+    'Spring Boot REST API + React 기반 풀스택 개인 포트폴리오. DB 설계부터 프론트엔드 UI까지 단독으로 개발했습니다.',
+    '2026.04', '2026-04-01', '2026-04-30',
+    '풀스택 개발', '단독',
+    '백엔드 API 설계와 프론트엔드 UI를 혼자 연결하면서, 데이터 흐름 전체를 직접 설계하고 책임지는 경험이 풀스택 역량을 크게 끌어올렸습니다. 작은 프로젝트일수록 명확한 구조 설계가 유지보수성을 좌우한다는 것을 체감했습니다.',
+    'https://github.com/yjh0207m/YJH---Developer-Portfolio-', '', NULL, 6);
 
 -- ─── 10. project_tech_stack ──────────────────────────────────
 -- CAFE ERP: Java, Python, JavaScript, HTML5/CSS3, Spring Boot, Spring Security, MyBatis,
@@ -141,11 +148,15 @@ INSERT INTO project_tech_stack (project_id, tech_id) VALUES
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
 (4,3),(4,4),(4,28),(4,7),(4,8),(4,20),(4,18),(4,22);
 
+-- 개발자 포트폴리오: Java, JavaScript, HTML5/CSS3, Spring Boot, React, MariaDB, Git/GitHub
+INSERT INTO project_tech_stack (project_id, tech_id) VALUES
+(6,1),(6,3),(6,28),(6,5),(6,9),(6,19),(6,22);
+
 -- ─── 11. highlights ──────────────────────────────────────────
-INSERT INTO highlights (value, label, sub, order_num) VALUES
-('40초',  '데이터 분석',  '기존 60분 → RPA 자동화', 1),
-('4.18',  '학점',        '4.5 만점 기준',           2),
-('4개',   '프로젝트',    '풀스택 · 모바일 · RPA',   3);
+INSERT INTO highlights (value, label, sub, order_num, computed_type) VALUES
+('40초', '데이터 분석', '기존 60분 → RPA 자동화', 1, NULL),
+('4.18', '학점',        '4.5 만점 기준',           2, NULL),
+('',     '프로젝트',    '풀스택 · 모바일 · RPA',   3, 'PROJECT_COUNT');
 
 -- ─── 12. project_metrics ─────────────────────────────────────
 INSERT INTO project_metrics (project_id, value, label) VALUES
@@ -160,4 +171,7 @@ INSERT INTO project_metrics (project_id, value, label) VALUES
 (3, 'TypeScript','타입 안정성'),
 (4, '좌석',      '인터랙티브 선택 UI'),
 (4, 'Expo',      '크로스 플랫폼 지원'),
-(4, '전체',      '예매 플로우 구현');
+(4, '전체',      '예매 플로우 구현'),
+(6, '풀스택',    '단독 설계·개발'),
+(6, '6개',       'REST API 엔드포인트'),
+(6, '5개',       '구현 페이지');
