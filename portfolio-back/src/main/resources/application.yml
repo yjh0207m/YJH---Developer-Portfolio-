@@ -10,7 +10,7 @@ spring:
 
   sql:
     init:
-      mode: never          # schema.sql → data.sql 순서로 항상 실행
+      mode: always         # schema.sql → data.sql 순서로 항상 실행
 
   jpa:
     hibernate:

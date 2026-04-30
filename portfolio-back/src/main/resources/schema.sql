@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS project_tech_stack;
 DROP TABLE IF EXISTS project_metrics;
 DROP TABLE IF EXISTS tech_skills;
 DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS highlights;
 DROP TABLE IF EXISTS awards;
 DROP TABLE IF EXISTS trainings;
 DROP TABLE IF EXISTS careers;
@@ -179,6 +180,18 @@ CREATE TABLE project_metrics (
     label      VARCHAR(100) NOT NULL  COMMENT '설명',
     PRIMARY KEY (id),
     CONSTRAINT fk_metric_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 12. highlights  (홈 Highlights 카드)
+-- ============================================================
+CREATE TABLE highlights (
+    id        BIGINT       NOT NULL AUTO_INCREMENT,
+    value     VARCHAR(50)  NOT NULL  COMMENT '수치 (예: 40초)',
+    label     VARCHAR(100) NOT NULL  COMMENT '항목명',
+    sub       VARCHAR(200)           COMMENT '설명',
+    order_num INT                    COMMENT '표시 순서',
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ─── 인덱스 ───────────────────────────────────────────────────

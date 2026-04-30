@@ -9,15 +9,10 @@ import styles from './Home.module.css'
 const CATEGORY_ORDER = ['개발언어', '프레임워크', '라이브러리', '데이터베이스', '개발툴', '기타']
 const CORE_CATEGORY = '개발언어'
 
-const stats = [
-  { value: '40초', label: '데이터 분석', sub: '기존 60분 → RPA 자동화' },
-  { value: '4.18', label: '학점', sub: '4.5 만점 기준' },
-  { value: '4개', label: '프로젝트', sub: '풀스택 · 모바일 · RPA' },
-]
-
 export default function Home() {
   const { data: projects, loading, error } = useFetch(api.getProjects)
   const { data: skills } = useFetch(api.getSkills)
+  const { data: highlights } = useFetch(api.getHighlights)
 
   return (
     <div className={styles.page}>
@@ -97,7 +92,7 @@ export default function Home() {
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>Highlights</h2>
           <div className={styles.statsGrid}>
-            {stats.map((s) => (
+            {(highlights ?? []).map((s) => (
               <div key={s.label} className={styles.statCard}>
                 <div className={styles.statValue}>{s.value}</div>
                 <div className={styles.statLabel}>{s.label}</div>

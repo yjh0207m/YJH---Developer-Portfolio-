@@ -4,6 +4,7 @@ import com.yjh.portfolio.dto.ResumeDto;
 import com.yjh.portfolio.repository.AwardRepository;
 import com.yjh.portfolio.repository.CertificationRepository;
 import com.yjh.portfolio.repository.EducationRepository;
+import com.yjh.portfolio.repository.HighlightRepository;
 import com.yjh.portfolio.repository.MilitaryRepository;
 import com.yjh.portfolio.repository.TechSkillRepository;
 import com.yjh.portfolio.repository.TrainingRepository;
@@ -26,6 +27,7 @@ public class ResumeController {
     private final TrainingRepository trainingRepository;
     private final AwardRepository awardRepository;
     private final TechSkillRepository techSkillRepository;
+    private final HighlightRepository highlightRepository;
 
     public ResumeController(
             EducationRepository educationRepository,
@@ -33,13 +35,15 @@ public class ResumeController {
             CertificationRepository certificationRepository,
             TrainingRepository trainingRepository,
             AwardRepository awardRepository,
-            TechSkillRepository techSkillRepository) {
+            TechSkillRepository techSkillRepository,
+            HighlightRepository highlightRepository) {
         this.educationRepository = educationRepository;
         this.militaryRepository = militaryRepository;
         this.certificationRepository = certificationRepository;
         this.trainingRepository = trainingRepository;
         this.awardRepository = awardRepository;
         this.techSkillRepository = techSkillRepository;
+        this.highlightRepository = highlightRepository;
     }
 
     @Operation(summary = "이력서 전체 데이터 조회")
@@ -81,6 +85,15 @@ public class ResumeController {
                 .toList();
 
         return new ResumeDto(education, military, certifications, trainings, awards);
+    }
+
+    @Operation(summary = "홈 Highlights 카드 조회")
+    @GetMapping("/highlights")
+    @Transactional(readOnly = true)
+    public List<Map<String, String>> getHighlights() {
+        return highlightRepository.findAllByOrderByOrderNumAsc().stream()
+                .map(h -> Map.of("value", h.getValue(), "label", h.getLabel(), "sub", h.getSub() != null ? h.getSub() : ""))
+                .toList();
     }
 
     @Operation(summary = "기술 스택 목록 조회 (show_on_profile=true)")

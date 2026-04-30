@@ -120,27 +120,34 @@ INSERT INTO projects (id, title, description, period, start_date, end_date,
     '', '', '/ppt/accounting_rpa.pdf', 5);
 
 -- ─── 10. project_tech_stack ──────────────────────────────────
--- CAFE ERP: Java, Spring Boot, Spring Security, Python, MariaDB, MyBatis, Brity RPA, JavaScript
+-- CAFE ERP: Java, Python, JavaScript, HTML5/CSS3, Spring Boot, Spring Security, MyBatis,
+--           VSCode, STS, MariaDB, HeidiSQL, Brity RPA, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(1,1),(1,5),(1,6),(1,2),(1,19),(1,10),(1,21),(1,3);
+(1,1),(1,2),(1,3),(1,28),(1,5),(1,6),(1,10),(1,15),(1,16),(1,19),(1,24),(1,21),(1,22);
 
--- 1팀 회계 자동화 시스템: Brity RPA
+-- 1팀 회계 자동화 시스템: Brity RPA, Python
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(5,21);
+(5,21),(5,2);
 
--- 새싹: React Native, Firebase, TypeScript, JavaScript
+-- 새싹: JavaScript, TypeScript, HTML5/CSS3, React Native, Firebase, Android Studio, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(2,7),(2,20),(2,4),(2,3);
+(2,3),(2,4),(2,28),(2,7),(2,20),(2,18),(2,22);
 
--- Movie Log: React, TypeScript, JavaScript
+-- Movie Log: HTML5/CSS3, JavaScript, React, MariaDB, HeidiSQL, DBeaver, Figma, Git/GitHub, VSCode
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(3,9),(3,4),(3,3);
+(3,28),(3,3),(3,9),(3,19),(3,24),(3,25),(3,23),(3,22),(3,15);
 
--- 영화 예매 앱: React Native, Expo, TypeScript
+-- 영화 예매 앱: JavaScript, TypeScript, HTML5/CSS3, React Native, Expo, Firebase, Android Studio, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(4,7),(4,8),(4,4);
+(4,3),(4,4),(4,28),(4,7),(4,8),(4,20),(4,18),(4,22);
 
--- ─── 11. project_metrics ─────────────────────────────────────
+-- ─── 11. highlights ──────────────────────────────────────────
+INSERT INTO highlights (value, label, sub, order_num) VALUES
+('40초',  '데이터 분석',  '기존 60분 → RPA 자동화', 1),
+('4.18',  '학점',        '4.5 만점 기준',           2),
+('4개',   '프로젝트',    '풀스택 · 모바일 · RPA',   3);
+
+-- ─── 12. project_metrics ─────────────────────────────────────
 INSERT INTO project_metrics (project_id, value, label) VALUES
 (1, '40초',      '데이터 분석 소요 시간 (기존 60분)'),
 (1, '3분 40초',  '리포트 자동 생성'),

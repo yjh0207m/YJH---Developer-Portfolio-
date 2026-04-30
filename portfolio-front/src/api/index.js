@@ -17,6 +17,7 @@ export const api = {
   getProfile: () => get('/profile'),
   getResume: () => get('/resume'),
   getSkills: () => get('/skills'),
+  getHighlights: () => get('/highlights'),
   contact: (body) =>
     fetch(`${BASE}/contact`, {
       method: 'POST',
