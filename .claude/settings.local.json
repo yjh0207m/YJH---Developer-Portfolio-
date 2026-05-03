@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(./mvnw compile *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }

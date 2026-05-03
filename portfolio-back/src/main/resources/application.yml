@@ -3,14 +3,14 @@ spring:
     name: portfolio-back
 
   datasource:
-    url: jdbc:mariadb://192.168.0.228:3306/portfolio
+    url: jdbc:mariadb://172.30.1.79:3306/portfolio
     username: root
-    password: root
+    password: 123
     driver-class-name: org.mariadb.jdbc.Driver
 
   sql:
     init:
-      mode: always         # schema.sql → data.sql 순서로 항상 실행
+      mode: never         # schema.sql → data.sql 순서로 항상 실행
 
   jpa:
     hibernate:
