@@ -36,6 +36,7 @@ CREATE TABLE profile (
     summary       TEXT                               COMMENT '한 줄 소개',
     github_url    VARCHAR(255)                       COMMENT 'GitHub 프로필 URL',
     blog_url      VARCHAR(255)                       COMMENT '블로그 URL',
+    position      VARCHAR(100)                       COMMENT '직함/포지션 (예: 풀스택 개발자)',
     PRIMARY KEY (id),
     CONSTRAINT chk_profile_single CHECK (id = 1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -143,7 +144,6 @@ CREATE TABLE projects (
     github_url          VARCHAR(255)                       COMMENT 'GitHub URL',
     demo_url            VARCHAR(255)                       COMMENT '배포 URL',
     ppt_url             VARCHAR(255)                       COMMENT 'PPT 다운로드 경로',
-    order_num           INT                                COMMENT '정렬 순서',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -196,8 +196,7 @@ CREATE TABLE highlights (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ─── 인덱스 ───────────────────────────────────────────────────
-CREATE INDEX idx_projects_order   ON projects      (order_num);
-CREATE INDEX idx_projects_date    ON projects      (start_date);
+CREATE INDEX idx_projects_date    ON projects      (end_date);
 CREATE INDEX idx_education_order  ON education     (order_num);
 CREATE INDEX idx_cert_order       ON certifications(order_num);
 CREATE INDEX idx_awards_order     ON awards        (order_num);

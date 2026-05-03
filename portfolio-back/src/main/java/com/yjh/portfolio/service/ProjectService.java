@@ -20,7 +20,7 @@ public class ProjectService {
 
     @Transactional(readOnly = true)
     public List<ProjectDto> findAll() {
-        return projectRepository.findAllByOrderByOrderNumAsc()
+        return projectRepository.findAllByOrderByEndDateDesc()
                 .stream()
                 .map(this::toDto)
                 .toList();

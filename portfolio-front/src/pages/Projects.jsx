@@ -20,8 +20,8 @@ export default function Projects() {
         {error && <ErrorMessage message={error.message} />}
         {projects && (
           <div className={styles.grid}>
-            {projects.map((p) => (
-              <ProjectCard key={p.id} project={p} />
+            {projects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} />
             ))}
           </div>
         )}

@@ -131,6 +131,7 @@ export default function About() {
                   <div className={styles.certName}>{a.name}</div>
                   <div className={styles.certMeta}>
                     {a.awardYear} · {a.organization}
+                    {a.note && ` · ${a.note}`}
                   </div>
                 </div>
               ))}

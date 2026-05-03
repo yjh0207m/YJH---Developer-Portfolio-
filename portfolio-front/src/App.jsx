@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AppProvider } from './context/AppContext'
+import { useEffect } from 'react'
 import Nav from './components/common/Nav'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -10,6 +10,7 @@ import Contact from './pages/Contact'
 
 function AnimatedRoutes() {
   const location = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
   return (
     <div key={location.pathname} className="page-enter">
       <Routes location={location}>
@@ -25,12 +26,10 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <Nav />
-        <AnimatedRoutes />
-        <Footer />
-      </BrowserRouter>
-    </AppProvider>
+    <BrowserRouter>
+      <Nav />
+      <AnimatedRoutes />
+      <Footer />
+    </BrowserRouter>
   )
 }

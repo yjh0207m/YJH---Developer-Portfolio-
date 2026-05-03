@@ -37,20 +37,14 @@ public class Profile {
     @Column(name = "desired_job", length = 200)
     private String desiredJob;
 
-    @Column(length = 200)
-    private String hobby;
-
-    @Column(name = "special_skill", length = 200)
-    private String specialSkill;
-
     @Column(columnDefinition = "TEXT")
     private String summary;
 
     @Column(name = "github_url", length = 255)
     private String githubUrl;
 
-    @Column(name = "blog_url", length = 255)
-    private String blogUrl;
+    @Column(length = 100)
+    private String position;
 
     public Integer getId() { return id; }
     public String getNameKo() { return nameKo; }
@@ -62,11 +56,9 @@ public class Profile {
     public String getPhone() { return phone; }
     public String getEmail() { return email; }
     public String getDesiredJob() { return desiredJob; }
-    public String getHobby() { return hobby; }
-    public String getSpecialSkill() { return specialSkill; }
     public String getSummary() { return summary; }
     public String getGithubUrl() { return githubUrl; }
-    public String getBlogUrl() { return blogUrl; }
+    public String getPosition() { return position; }
 
     public void setId(Integer id) { this.id = id; }
     public void setNameKo(String nameKo) { this.nameKo = nameKo; }
@@ -78,9 +70,7 @@ public class Profile {
     public void setPhone(String phone) { this.phone = phone; }
     public void setEmail(String email) { this.email = email; }
     public void setDesiredJob(String desiredJob) { this.desiredJob = desiredJob; }
-    public void setHobby(String hobby) { this.hobby = hobby; }
-    public void setSpecialSkill(String specialSkill) { this.specialSkill = specialSkill; }
     public void setSummary(String summary) { this.summary = summary; }
     public void setGithubUrl(String githubUrl) { this.githubUrl = githubUrl; }
-    public void setBlogUrl(String blogUrl) { this.blogUrl = blogUrl; }
+    public void setPosition(String position) { this.position = position; }
 }

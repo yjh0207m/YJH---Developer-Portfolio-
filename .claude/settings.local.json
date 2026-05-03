@@ -4,7 +4,10 @@
       "Bash(./mvnw compile *)",
       "Bash(npm install *)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git rm *)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\yjh0207m\\\\git\\\\YJH---Developer-Portfolio-\" -Recurse -Force -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object FullName)"
     ]
   }
 }

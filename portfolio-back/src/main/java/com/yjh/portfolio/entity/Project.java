@@ -46,9 +46,6 @@ public class Project {
     @Column(name = "ppt_url", length = 255)
     private String pptUrl;
 
-    @Column(name = "order_num")
-    private Integer orderNum;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "project_tech_stack",
@@ -73,7 +70,6 @@ public class Project {
     public String getGithubUrl() { return githubUrl; }
     public String getDemoUrl() { return demoUrl; }
     public String getPptUrl() { return pptUrl; }
-    public Integer getOrderNum() { return orderNum; }
     public List<TechSkill> getTechSkills() { return techSkills; }
     public List<ProjectMetric> getMetrics() { return metrics; }
 
@@ -89,7 +85,6 @@ public class Project {
     public void setGithubUrl(String githubUrl) { this.githubUrl = githubUrl; }
     public void setDemoUrl(String demoUrl) { this.demoUrl = demoUrl; }
     public void setPptUrl(String pptUrl) { this.pptUrl = pptUrl; }
-    public void setOrderNum(Integer orderNum) { this.orderNum = orderNum; }
     public void setTechSkills(List<TechSkill> techSkills) { this.techSkills = techSkills; }
     public void setMetrics(List<ProjectMetric> metrics) { this.metrics = metrics; }
 }

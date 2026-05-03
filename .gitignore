@@ -10,6 +10,7 @@ portfolio-front/.env.local
 # ─── Backend ────────────────────────────────────────────────
 portfolio-back/target/
 portfolio-back/.env
+portfolio-back/src/main/resources/application.yml
 portfolio-back/src/main/resources/application-local.yml
 
 # ─── OS / IDE ───────────────────────────────────────────────

@@ -6,14 +6,15 @@
 -- ─── 1. profile ──────────────────────────────────────────────
 INSERT INTO profile (id, name_ko, name_en, birth_date, gender, nationality,
                      address, phone, email, desired_job, hobby, special_skill,
-                     summary, github_url)
+                     summary, github_url, position)
 VALUES (1, '유조현', 'Yu JoHyun', '2000-02-07', 'M', '대한민국',
         '경기도 수원시 장안구 팔달로303번길 24-1 2층',
         '010-8868-1937', 'yjh0207m@naver.com',
         '풀스택, PM, 앱 개발, RPA 개발',
         '게임, 블로그 읽기', '피아노 연주',
         '기술로 무언가를 만들고 자동화하는 일에 매력을 느끼는 풀스택 개발자입니다.',
-        'https://github.com/yjh0207m');
+        'https://github.com/yjh0207m',
+        '풀스택 개발자');
 
 -- ─── 2. education ────────────────────────────────────────────
 INSERT INTO education (school_name, major, start_year, end_year, graduation, gpa, gpa_max, order_num) VALUES
@@ -40,9 +41,11 @@ INSERT INTO trainings (institution, course_name, content, start_date, end_date, 
 
 -- ─── 7. awards ───────────────────────────────────────────────
 INSERT INTO awards (name, award_year, organization, note, order_num) VALUES
-('전공실기 최우수 장학',         '2019', '국제예술대학교', NULL, 1),
-('수업 경연대회 우수 수업지도안 2위', '2022', '국제예술대학교', NULL, 2),
-('수업 경연대회 우수 수업동영상 1위', '2022', '국제예술대학교', NULL, 3);
+('K-Digital 차세대 AI 개발 솔루션 우수 훈련생 표창',              '2026', '글로벌아카데미', '1위', 1),
+('K-Digital 차세대 AI 개발 솔루션 우수 프로젝트 표창',            '2026', '글로벌아카데미', 'CAFE ERP 프로젝트', 2),
+('전공실기 최우수 장학',         '2019', '국제예술대학교', NULL, 3),
+('수업 경연대회 우수 수업지도안 2위', '2022', '국제예술대학교', NULL, 4),
+('수업 경연대회 우수 수업동영상 1위', '2022', '국제예술대학교', NULL, 5);
 
 -- ─── 8. tech_skills ──────────────────────────────────────────
 INSERT INTO tech_skills (id, name, category, show_on_profile) VALUES
@@ -79,78 +82,79 @@ INSERT INTO tech_skills (id, name, category, show_on_profile) VALUES
 (25, 'DBeaver',        '기타', 0),
 (26, 'R Studio',       '기타', 0),
 (27, 'Node.js',        '프레임워크', 1),
-(28, 'HTML5/CSS3',     '개발언어',   1);
+(28, 'HTML5',          '마크업/스타일', 1),
+(29, 'CSS3',           '마크업/스타일', 1);
 
 -- ─── 9. projects ─────────────────────────────────────────────
 INSERT INTO projects (id, title, description, period, start_date, end_date,
-                      role, implementation_type, lesson, github_url, demo_url, ppt_url, order_num) VALUES
+                      role, implementation_type, lesson, github_url, demo_url, ppt_url) VALUES
 (1, 'CAFE ERP',
     'Spring Boot 기반 카페 통합 관리 시스템. Brity RPA·Python으로 데이터 분석 소요 시간을 60분 → 40초로 단축.',
     '2026.03 – 2026.04', '2026-03-10', '2026-04-30',
     '팀장', '팀협동',
     '팀장으로서 일정 관리, 업무 분담, 원활한 소통과 함께 보안·무결성 등 프로젝트 전반을 꼼꼼히 검증하는 역량이 중요함을 깨달았습니다. OCR, AI 모델, Brity RPA 등 외부 기술 간의 연계가 결과물의 완성도와 상업성을 좌우한다는 점을 체감했습니다.',
-    'https://github.com/yjh0207m/CAFE_ERP_Project', '', '/ppt/cafe_erp.pdf', 1),
+    'https://github.com/yjh0207m/CAFE_ERP_Project', '', '/ppt/cafe_erp.pdf'),
 
 (2, '새싹 (DateApp)',
     'React Native 기반 데이트 코스 추천 소셜 앱. Firebase 실시간 DB로 채팅 기능을 구현했습니다.',
     '2026.01', '2026-01-23', '2026-01-31',
     '단독 개발', '단독',
     'Open API를 활용하며 외부 리소스를 적재적소에 사용하는 것도 개발 역량의 일부임을 깨달았습니다. 단독 작업일수록 탄탄한 사전 설계가 개발 효율을 좌우한다는 점을 체감했습니다.',
-    'https://github.com/yjh0207m/SaeSak', '', NULL, 2),
+    'https://github.com/yjh0207m/SaeSak', '', NULL),
 
 (3, 'Movie Log',
     'React + TypeScript로 구현한 영화 감상 기록 웹앱. 영화 API 연동으로 검색·기록 기능을 제공합니다.',
     '2025.12', '2025-12-02', '2025-12-12',
     '프론트엔드 개발', '팀협동',
     'DB 스키마를 탄탄히 설계할수록 개발 중 시행착오가 줄고 업무 효율이 높아진다는 것을 체감했습니다. 독창적인 컨셉도 중요하지만, 사용자에게 익숙한 트렌디한 디자인 체계 안에서 차별화를 추구하는 것이 더 효과적임을 느꼈습니다.',
-    'https://github.com/PigDuck5390/MovieLog', '', '/ppt/movie_log.pdf', 3),
+    'https://github.com/PigDuck5390/MovieLog', '', '/ppt/movie_log.pdf'),
 
-(4, '영화 예매 앱',
+(4, 'Movie Log 모바일 앱',
     'React Native + Expo로 제작한 모바일 영화 예매 애플리케이션. 인터랙티브 좌석 선택 UI를 구현했습니다.',
     '2026.01', '2026-01-15', '2026-01-23',
     '프론트엔드 개발', '팀협동',
     '서비스 개발 시 웹/앱 확장을 고려한 DB 선택이 범용성과 이식성에 큰 영향을 미친다는 것을 깨달았습니다. 최적화된 코드가 개발 속도, 유지 보수성, 처리 성능을 좌우한다는 점을 체감했습니다.',
-    'https://github.com/PigDuck5390/MovieLogApp', '', NULL, 4),
+    'https://github.com/PigDuck5390/MovieLogApp', '', NULL),
 
-(5, '1팀 회계 자동화 시스템',
+(5, '회계 자동화 시스템',
     'Brity RPA를 활용한 카페 회계 업무 자동화 미니 프로젝트. 매출·매입 데이터 자동 집계 및 보고서 자동 생성 프로세스를 구현했습니다.',
-    '2025.11 – 2026.04', '2025-11-01', '2026-04-30',
-    '개발', '팀협동',
+    '2026.03', '2026-03-03', '2026-03-10',
+    '자동화 개발', '팀협동',
     'RPA 자동화를 통해 반복 업무를 제거하는 것이 실질적인 업무 효율 개선으로 이어진다는 점을 체감했습니다.',
-    '', '', '/ppt/accounting_rpa.pdf', 5),
+    '', '', '/ppt/accounting_rpa.pdf'),
 
 (6, '개발자 포트폴리오',
     'Spring Boot REST API + React 기반 풀스택 개인 포트폴리오. DB 설계부터 프론트엔드 UI까지 단독으로 개발했습니다.',
     '2026.04', '2026-04-01', '2026-04-30',
     '풀스택 개발', '단독',
     '백엔드 API 설계와 프론트엔드 UI를 혼자 연결하면서, 데이터 흐름 전체를 직접 설계하고 책임지는 경험이 풀스택 역량을 크게 끌어올렸습니다. 작은 프로젝트일수록 명확한 구조 설계가 유지보수성을 좌우한다는 것을 체감했습니다.',
-    'https://github.com/yjh0207m/YJH---Developer-Portfolio-', '', NULL, 6);
+    'https://github.com/yjh0207m/YJH---Developer-Portfolio-', '', NULL);
 
 -- ─── 10. project_tech_stack ──────────────────────────────────
--- CAFE ERP: Java, Python, JavaScript, HTML5/CSS3, Spring Boot, Spring Security, MyBatis,
+-- CAFE ERP: Java, Python, JavaScript, HTML5, CSS3, Spring Boot, Spring Security, MyBatis,
 --           VSCode, STS, MariaDB, HeidiSQL, Brity RPA, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(1,1),(1,2),(1,3),(1,28),(1,5),(1,6),(1,10),(1,15),(1,16),(1,19),(1,24),(1,21),(1,22);
+(1,1),(1,2),(1,3),(1,28),(1,29),(1,5),(1,6),(1,10),(1,15),(1,16),(1,19),(1,24),(1,21),(1,22);
 
--- 1팀 회계 자동화 시스템: Brity RPA, Python
+-- 회계 자동화 시스템: Brity RPA, Python
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
 (5,21),(5,2);
 
--- 새싹: JavaScript, TypeScript, HTML5/CSS3, React Native, Firebase, Android Studio, Git/GitHub
+-- 새싹: JavaScript, TypeScript, HTML5, CSS3, React Native, Firebase, Android Studio, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(2,3),(2,4),(2,28),(2,7),(2,20),(2,18),(2,22);
+(2,3),(2,4),(2,28),(2,29),(2,7),(2,20),(2,18),(2,22);
 
--- Movie Log: HTML5/CSS3, JavaScript, React, MariaDB, HeidiSQL, DBeaver, Figma, Git/GitHub, VSCode
+-- Movie Log: HTML5, CSS3, JavaScript, React, MariaDB, HeidiSQL, DBeaver, Figma, Git/GitHub, VSCode
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(3,28),(3,3),(3,9),(3,19),(3,24),(3,25),(3,23),(3,22),(3,15);
+(3,28),(3,29),(3,3),(3,9),(3,19),(3,24),(3,25),(3,23),(3,22),(3,15);
 
--- 영화 예매 앱: JavaScript, TypeScript, HTML5/CSS3, React Native, Expo, Firebase, Android Studio, Git/GitHub
+-- Movie Log 모바일 앱: JavaScript, TypeScript, HTML5, CSS3, Expo, Firebase, Android Studio, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(4,3),(4,4),(4,28),(4,7),(4,8),(4,20),(4,18),(4,22);
+(4,3),(4,4),(4,28),(4,29),(4,8),(4,20),(4,18),(4,22);
 
--- 개발자 포트폴리오: Java, JavaScript, HTML5/CSS3, Spring Boot, React, MariaDB, Git/GitHub
+-- 개발자 포트폴리오: Java, JavaScript, HTML5, CSS3, Spring Boot, React, MariaDB, Git/GitHub
 INSERT INTO project_tech_stack (project_id, tech_id) VALUES
-(6,1),(6,3),(6,28),(6,5),(6,9),(6,19),(6,22);
+(6,1),(6,3),(6,28),(6,29),(6,5),(6,9),(6,19),(6,22);
 
 -- ─── 11. highlights ──────────────────────────────────────────
 INSERT INTO highlights (value, label, sub, order_num, computed_type) VALUES

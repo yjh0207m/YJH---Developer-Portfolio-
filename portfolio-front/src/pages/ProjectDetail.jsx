@@ -3,6 +3,7 @@ import { api } from '../api'
 import { useFetch } from '../hooks/useFetch'
 import MetricCard from '../components/projects/MetricCard'
 import Spinner from '../components/common/Spinner'
+import { CATEGORY_ORDER } from '../constants'
 import styles from './ProjectDetail.module.css'
 
 export default function ProjectDetail() {
@@ -42,10 +43,7 @@ export default function ProjectDetail() {
 
   const summary = description
   const type = implementationType ?? role
-  const mainRole = ''
-  const challenge = ''
 
-  const CATEGORY_ORDER = ['개발언어', '프레임워크', '라이브러리', '데이터베이스', '개발툴', '기타']
   const techGroups = CATEGORY_ORDER.reduce((acc, cat) => {
     const names = (techStack ?? []).filter(t => t.category === cat).map(t => t.name)
     if (names.length > 0) acc.push({ category: cat, names })
@@ -103,22 +101,6 @@ export default function ProjectDetail() {
                 <MetricCard key={m.label} value={m.value} label={m.label} />
               ))}
             </div>
-          </section>
-        )}
-
-        {/* Main Role */}
-        {mainRole && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionLabel}>주요 역할</h2>
-            <p className={styles.body}>{mainRole}</p>
-          </section>
-        )}
-
-        {/* Challenge */}
-        {challenge && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionLabel}>기술적 도전</h2>
-            <p className={styles.body}>{challenge}</p>
           </section>
         )}
 

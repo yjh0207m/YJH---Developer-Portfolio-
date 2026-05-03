@@ -31,7 +31,8 @@ public class ProfileController {
                         "location", shortenAddress(p.getAddress()),
                         "github",   p.getGithubUrl() != null ? p.getGithubUrl() : "",
                         "summary",  p.getSummary() != null ? p.getSummary() : "",
-                        "desiredJob", p.getDesiredJob() != null ? p.getDesiredJob() : ""
+                        "desiredJob", p.getDesiredJob() != null ? p.getDesiredJob() : "",
+                        "position", p.getPosition() != null ? p.getPosition() : ""
                 )))
                 .orElse(ResponseEntity.notFound().build());
     }
