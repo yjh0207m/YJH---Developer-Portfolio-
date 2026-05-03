@@ -42,24 +42,27 @@ jobs:
           printf 'web: java -jar app.jar\n' > deploy/Procfile
           cd deploy && zip -r ../deploy.zip .
 
+      - name: Set version label
+        run: echo "VERSION=$(date +%Y%m%d%H%M%S)-${{ github.sha }}" >> $GITHUB_ENV
+
       - name: Upload artifact to S3
         working-directory: portfolio-back
         run: |
           aws s3 cp deploy.zip \
-            s3://${{ secrets.EB_S3_BUCKET }}/portfolio-back/${{ github.sha }}.zip
+            s3://${{ secrets.EB_S3_BUCKET }}/portfolio-back/${{ env.VERSION }}.zip
 
       - name: Create Elastic Beanstalk application version
         run: |
           aws elasticbeanstalk create-application-version \
             --application-name ${{ secrets.EB_APP_NAME }} \
-            --version-label ${{ github.sha }} \
-            --source-bundle S3Bucket=${{ secrets.EB_S3_BUCKET }},S3Key=portfolio-back/${{ github.sha }}.zip
+            --version-label ${{ env.VERSION }} \
+            --source-bundle S3Bucket=${{ secrets.EB_S3_BUCKET }},S3Key=portfolio-back/${{ env.VERSION }}.zip
 
       - name: Deploy to Elastic Beanstalk
         run: |
           aws elasticbeanstalk update-environment \
             --environment-name ${{ secrets.EB_ENV_NAME }} \
-            --version-label ${{ github.sha }}
+            --version-label ${{ env.VERSION }}
 
       - name: Wait for environment to be ready
         run: |
