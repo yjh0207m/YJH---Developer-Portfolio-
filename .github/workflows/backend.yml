@@ -52,9 +52,7 @@ jobs:
           aws elasticbeanstalk create-application-version \
             --application-name ${{ secrets.EB_APP_NAME }} \
             --version-label ${{ github.sha }} \
-            --source-bundle \
-              S3Bucket=${{ secrets.EB_S3_BUCKET }},\
-              S3Key=portfolio-back/${{ github.sha }}.zip
+            --source-bundle S3Bucket=${{ secrets.EB_S3_BUCKET }},S3Key=portfolio-back/${{ github.sha }}.zip
 
       - name: Deploy to Elastic Beanstalk
         run: |
