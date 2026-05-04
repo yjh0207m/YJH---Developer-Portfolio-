@@ -8,9 +8,22 @@ import ProjectDetail from './pages/ProjectDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
 
+const PAGE_TITLES = {
+  '/': '유조현 포트폴리오',
+  '/projects': 'Projects | 유조현 포트폴리오',
+  '/about': 'About | 유조현 포트폴리오',
+  '/contact': 'Contact | 유조현 포트폴리오',
+}
+
 function AnimatedRoutes() {
   const location = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const base = location.pathname.startsWith('/projects/')
+      ? 'Projects | 유조현 포트폴리오'
+      : PAGE_TITLES[location.pathname] ?? '유조현 포트폴리오'
+    document.title = base
+  }, [location.pathname])
   return (
     <div key={location.pathname} className="page-enter">
       <Routes location={location}>
