@@ -4,6 +4,7 @@
 -- ============================================================
 
 -- ─── DROP (의존성 역순) ───────────────────────────────────────
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS project_tech_stack;
 DROP TABLE IF EXISTS project_metrics;
 DROP TABLE IF EXISTS tech_skills;
@@ -16,6 +17,7 @@ DROP TABLE IF EXISTS certifications;
 DROP TABLE IF EXISTS military;
 DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS profile;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ============================================================
 -- 1. profile  (기본 프로필 — 단일 행)
