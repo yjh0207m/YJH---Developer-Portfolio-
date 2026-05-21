@@ -5,9 +5,19 @@
   right: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: rgba(11, 13, 24, 0.75);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
+  transition: height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.compact {
+  height: 48px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
 }
 
 .nav {
@@ -21,10 +31,15 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  transition: font-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.logoCompact {
+  font-size: 1.15rem;
 }
 
 .dot {
@@ -39,21 +54,22 @@
 .link {
   display: block;
   padding: 6px 14px;
-  border-radius: var(--radius-sm);
+  border-radius: 20px;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
   transition: color var(--transition), background var(--transition);
 }
 
 .link:hover {
   color: var(--text-primary);
-  background: var(--bg-card);
+  background: var(--bg-secondary);
 }
 
 .active {
-  color: var(--text-primary) !important;
-  background: var(--bg-card) !important;
+  color: var(--accent) !important;
+  background: var(--accent-dim) !important;
+  font-weight: 600;
 }
 
 /* ─── Responsive ─── */

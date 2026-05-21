@@ -1,11 +1,73 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
 import { api } from '../api'
 import { useFetch } from '../hooks/useFetch'
+import { useInView } from '../hooks/useInView'
 import ProjectCard from '../components/projects/ProjectCard'
+import MagneticBtn from '../components/common/MagneticBtn'
+import Pagination from '../components/common/Pagination'
 import Spinner from '../components/common/Spinner'
 import ErrorMessage from '../components/common/ErrorMessage'
+import { usePagination } from '../hooks/usePagination'
 import { CATEGORY_ORDER } from '../constants'
 import styles from './Home.module.css'
+
+// 타이핑 효과 훅
+function useTypewriter(text, delay = 500, speed = 55) {
+  const [displayed, setDisplayed] = useState('')
+  const [done, setDone] = useState(false)
+  useEffect(() => {
+    setDisplayed('')
+    setDone(false)
+    const t = setTimeout(() => {
+      let i = 0
+      const iv = setInterval(() => {
+        i++
+        setDisplayed(text.slice(0, i))
+        if (i >= text.length) { clearInterval(iv); setDone(true) }
+      }, speed)
+      return () => clearInterval(iv)
+    }, delay)
+    return () => clearTimeout(t)
+  }, [text, delay, speed])
+  return { displayed, done }
+}
+
+// 카운트업 훅
+function useCountUp(targetStr, inView) {
+  const [display, setDisplay] = useState('')
+  const started = useRef(false)
+  useEffect(() => {
+    if (!inView || started.current) return
+    const match = targetStr.match(/^([\d.]+)(.*)$/)
+    if (!match) { setDisplay(targetStr); return }
+    started.current = true
+    const target = parseFloat(match[1])
+    const suffix = match[2]
+    const decimals = match[1].includes('.') ? match[1].split('.')[1].length : 0
+    const duration = 1400
+    const startTime = performance.now()
+    const tick = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplay((eased * target).toFixed(decimals) + suffix)
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [inView, targetStr])
+  return display || targetStr
+}
+
+function StatCard({ value, label, sub, inView }) {
+  const animated = useCountUp(value, inView)
+  return (
+    <div className={styles.statCard}>
+      <div className={styles.statValue}>{animated}</div>
+      <div className={styles.statLabel}>{label}</div>
+      <div className={styles.statSub}>{sub}</div>
+    </div>
+  )
+}
 
 export default function Home() {
   const { data: projects, loading, error } = useFetch(api.getProjects)
@@ -13,27 +75,41 @@ export default function Home() {
   const { data: highlights } = useFetch(api.getHighlights)
   const { data: profile } = useFetch(api.getProfile)
 
+  const { displayed: typed, done: typingDone } = useTypewriter('코드를 창작합니다.')
+
+  const [projectsRef, projectsInView] = useInView()
+  const [skillsRef, skillsInView] = useInView()
+  const [statsRef, statsInView] = useInView()
+
+  const { page: projPage, setPage: setProjPage, totalPages: projTotalPages, slice: pagedProjects } =
+    usePagination(projects ?? [], 5)
+
   return (
     <div className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroText}>
-            <p className={styles.eyebrow}>개발자 유조현</p>
+            <p className={styles.eyebrow}>♩ 음악에서 코드로</p>
             <h1 className={styles.headline}>
-              창작이 곧<br />
-              개발이었습니다.
+              악보처럼<br />
+              <span className={styles.headlineAccent}>
+                {typed}
+                {!typingDone && <span className={styles.cursor}>|</span>}
+              </span>
             </h1>
             <p className={styles.sub}>
-              기술로 무언가를 만들고 자동화하는 일에 매력을 느끼는 풀스택 개발자입니다.
+              실용음악과 작곡을 전공하고 개발자가 됐습니다.<br />
+              선율을 설계하듯 코드를 구조화하고, RPA 자동화로<br />
+              60분짜리 업무를 40초로 단축하는 풀스택 개발자입니다.
             </p>
             <div className={styles.heroBtns}>
-              <Link to="/projects" className={styles.btnPrimary}>
-                프로젝트 보기
-              </Link>
-              <Link to="/contact" className={styles.btnSecondary}>
-                연락하기
-              </Link>
+              <MagneticBtn>
+                <Link to="/projects" className={styles.btnPrimary}>프로젝트 보기</Link>
+              </MagneticBtn>
+              <MagneticBtn>
+                <Link to="/contact" className={styles.btnSecondary}>연락하기</Link>
+              </MagneticBtn>
             </div>
             <div className={styles.infoStrip}>
               {profile?.location && (
@@ -66,28 +142,47 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className={styles.section}>
+      <section
+        ref={projectsRef}
+        className={`${styles.section} ${styles.fadeUp} ${projectsInView ? styles.inView : ''}`}
+      >
         <div className={styles.container}>
           <div className={styles.sectionHead}>
             <h2 className={styles.sectionTitle}>Featured Projects</h2>
-            <Link to="/projects" className={styles.seeAll}>
-              전체 보기 →
-            </Link>
+            <Link to="/projects" className={styles.seeAll}>전체 보기 →</Link>
           </div>
           {loading && <Spinner />}
           {error && <ErrorMessage message={error.message} />}
           {projects && (
-            <div className={styles.projectGrid}>
-              {projects.map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i} />
-              ))}
-            </div>
+            <>
+              <div className={styles.projectGrid}>
+                {pagedProjects.map((p, i) => (
+                  <ProjectCard
+                    key={p.id}
+                    project={p}
+                    index={(projPage - 1) * 5 + i}
+                    inView={projectsInView}
+                  />
+                ))}
+              </div>
+              <Pagination
+                page={projPage}
+                totalPages={projTotalPages}
+                onPageChange={(p) => {
+                  setProjPage(p)
+                  projectsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }}
+              />
+            </>
           )}
         </div>
       </section>
 
       {/* Skills */}
-      <section className={styles.section}>
+      <section
+        ref={skillsRef}
+        className={`${styles.section} ${styles.fadeUp} ${skillsInView ? styles.inView : ''}`}
+      >
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>Skills</h2>
           <div className={styles.skillGroups}>
@@ -99,10 +194,7 @@ export default function Home() {
                   <span className={styles.skillGroupLabel}>{cat}</span>
                   <div className={styles.skillTags}>
                     {items.map(({ name }) => (
-                      <span
-                        key={name}
-                        className={`${styles.skillTag} ${styles.core}`}
-                      >
+                      <span key={name} className={`${styles.skillTag} ${styles.core}`}>
                         {name}
                       </span>
                     ))}
@@ -114,17 +206,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className={styles.section}>
+      {/* Highlights */}
+      <section
+        ref={statsRef}
+        className={`${styles.section} ${styles.fadeUp} ${statsInView ? styles.inView : ''}`}
+      >
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>Highlights</h2>
           <div className={styles.statsGrid}>
             {(highlights ?? []).map((s) => (
-              <div key={s.label} className={styles.statCard}>
-                <div className={styles.statValue}>{s.value}</div>
-                <div className={styles.statLabel}>{s.label}</div>
-                <div className={styles.statSub}>{s.sub}</div>
-              </div>
+              <StatCard
+                key={s.label}
+                value={s.value}
+                label={s.label}
+                sub={s.sub}
+                inView={statsInView}
+              />
             ))}
           </div>
         </div>

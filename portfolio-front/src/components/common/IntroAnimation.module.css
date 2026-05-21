@@ -1,0 +1,142 @@
+/* ─── 전체 오버레이 ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #ffffff;
+  overflow: hidden;
+  transition: transform 0.58s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.overlayExit {
+  transform: translateY(-100%);
+}
+
+/* ─── 자유 음표 레이어 ─── */
+.notesLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.notesHide {
+  opacity: 0;
+}
+
+.freeNote {
+  position: absolute;
+  font-size: 2.2rem;
+  color: #16a34a;
+  animation:
+    noteAppear 0.55s ease calc(var(--i) * 0.11s) both,
+    noteBob    2.2s  ease-in-out calc(var(--i) * 0.11s + 0.55s) infinite;
+  user-select: none;
+}
+
+@keyframes noteAppear {
+  from { opacity: 0; transform: translateY(14px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+@keyframes noteBob {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ─── 코드 에디터 컨테이너 ─── */
+.codeContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ─── 각 코드 줄 ─── */
+.codeRow {
+  display: flex;
+  flex-direction: column;
+}
+
+/* music 시 height=0 (보이지 않음), transform 시 확장 */
+.codeContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 0;
+  overflow: hidden;
+  padding: 0 10vw;
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 0.07s);
+}
+
+.codeExpand .codeContent {
+  height: 56px;
+}
+
+/* 오선지 줄 → 코드 에디터 구분선 */
+.ruler {
+  height: 1.5px;
+  background: rgba(22, 163, 74, 0.14);
+  transform-origin: left center;
+  animation: drawRuler 0.4s ease both;
+  animation-delay: calc(var(--i) * 0.1s + 0.05s);
+}
+
+@keyframes drawRuler {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ─── 줄 번호 ─── */
+.lineNum {
+  font-family: 'Courier New', 'SF Mono', monospace;
+  font-size: 0.82rem;
+  color: #b0b8d4;
+  width: 28px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  transition-delay: calc(var(--i) * 0.07s + 0.18s);
+}
+
+.lineNum.show {
+  opacity: 1;
+}
+
+/* ─── 코드 텍스트 ─── */
+.codeText {
+  font-family: 'Courier New', 'SF Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #16a34a;
+  opacity: 0;
+  white-space: pre;
+  transition: opacity 0.4s ease;
+  transition-delay: calc(var(--i) * 0.07s + 0.28s);
+}
+
+.codeText.show {
+  opacity: 1;
+}
+
+/* ─── 이름 라벨 ─── */
+.authorLine {
+  position: absolute;
+  bottom: 12%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #b0b8d4;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.5s 0.55s ease;
+}
+
+.authorLine.show {
+  opacity: 1;
+}

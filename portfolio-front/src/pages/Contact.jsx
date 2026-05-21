@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
+import NoteConfetti from '../components/common/NoteConfetti'
 import styles from './Contact.module.css'
 
 const EMAILJS_SERVICE_ID  = 'service_xn37eyi'
@@ -20,6 +21,7 @@ const contactInfo = [
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState(null) // null | 'sending' | 'done' | 'error'
+  const successRef = useRef(null)
 
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -44,6 +46,7 @@ export default function Contact() {
 
   return (
     <div className={styles.page}>
+      <NoteConfetti show={status === 'done'} originRef={successRef} />
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>함께 일해요.</h1>
@@ -134,7 +137,7 @@ export default function Contact() {
             </button>
             {status === 'done' && (
               <p className={styles.successMsg}>
-                메시지가 전송됐습니다. 감사합니다!
+                <span ref={successRef}>메시지가 전송됐습니다. 감사합니다!</span>
               </p>
             )}
             {status === 'error' && (

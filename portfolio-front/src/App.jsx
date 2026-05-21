@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Nav from './components/common/Nav'
 import Footer from './components/common/Footer'
+import IntroAnimation from './components/common/IntroAnimation'
+import CursorTrail from './components/common/CursorTrail'
+import ScrollProgress from './components/common/ScrollProgress'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
@@ -38,11 +41,23 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  // 페이지 로드마다 인트로 재생 (SPA 내 페이지 이동 시에는 재생 안 함)
+  const [introComplete, setIntroComplete] = useState(false)
+
+  const handleIntroComplete = useCallback(() => {
+    setIntroComplete(true)
+  }, [])
+
   return (
     <BrowserRouter>
+      <ScrollProgress />
+      {!introComplete && (
+        <IntroAnimation onComplete={handleIntroComplete} />
+      )}
       <Nav />
       <AnimatedRoutes />
       <Footer />
+      <CursorTrail />
     </BrowserRouter>
   )
 }

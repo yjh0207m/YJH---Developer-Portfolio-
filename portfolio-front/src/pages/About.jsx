@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { api } from '../api'
 import { useFetch } from '../hooks/useFetch'
 import Spinner from '../components/common/Spinner'
@@ -5,6 +6,25 @@ import styles from './About.module.css'
 
 export default function About() {
   const { data: resume, loading } = useFetch(api.getResume)
+  const timelineRef = useRef(null)
+
+  useEffect(() => {
+    if (!timelineRef.current) return
+    const items = timelineRef.current.querySelectorAll(`.${styles.timelineItem}`)
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add(styles.visible), i * 80)
+            obs.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+    items.forEach((item) => obs.observe(item))
+    return () => obs.disconnect()
+  }, [resume])
 
   if (loading) {
     return (
@@ -52,7 +72,7 @@ export default function About() {
         {/* Education & Military */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Education & Experience</h2>
-          <div className={styles.timeline}>
+          <div className={styles.timeline} ref={timelineRef}>
             {trainings.map((t) => (
               <div key={t.courseName} className={styles.timelineItem}>
                 <div className={styles.timelineDot} data-type="education" />
@@ -73,7 +93,7 @@ export default function About() {
                     {formatDate(military.startDate)} – {formatDate(military.endDate)}
                   </span>
                   <h3 className={styles.timelineTitle}>
-                    {military.branch} {military.rank} 만기 제대
+                    {military.branch} {military.rank} 만기 전역
                   </h3>
                   <p className={styles.timelineDesc}>
                     {military.status} · {military.specialty}병과

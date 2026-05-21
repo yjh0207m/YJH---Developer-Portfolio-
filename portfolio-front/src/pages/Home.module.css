@@ -5,24 +5,59 @@
 /* ─── Hero ─── */
 .hero {
   position: relative;
-  min-height: calc((100vh - var(--nav-height)) * 0.67);
+  min-height: calc((100vh - var(--nav-height)) * 0.72);
   display: flex;
   align-items: center;
-  padding: 52px 24px;
+  padding: 64px 24px;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
 
-/* hero 전용 그라데이션 오브 — body 배경보다 강하게 */
+/* 악보 오선지 — 배경 텍스처 (흘러내리는 애니메이션) */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 60% 80% at -5% 60%, rgba(99, 102, 241, 0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 105% 10%, rgba(219, 39, 119, 0.18) 0%, transparent 55%);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 28px,
+    rgba(22, 163, 74, 0.055) 28px,
+    rgba(22, 163, 74, 0.055) 29px
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.4) 15%,
+    rgba(0,0,0,0.4) 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.4) 15%,
+    rgba(0,0,0,0.4) 85%,
+    transparent 100%
+  );
   pointer-events: none;
   z-index: 0;
+  animation: staffDrift 5s linear infinite;
+}
+
+/* 큰 음표 — 왼쪽 배경 장식 */
+.hero::after {
+  content: '♩';
+  position: absolute;
+  left: -4%;
+  right: auto;
+  top: 50%;
+  transform: translateY(-58%);
+  font-size: 26rem;
+  line-height: 1;
+  color: rgba(22, 163, 74, 0.045);
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
 }
 
 .heroInner {
@@ -32,8 +67,8 @@
   margin: 0 auto;
   width: 100%;
   display: flex;
-  align-items: stretch;
-  gap: 48px;
+  align-items: center;
+  gap: 56px;
 }
 
 .heroText {
@@ -57,10 +92,11 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  padding: 32px 24px;
+  padding: 36px 24px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
 }
 
 .profileImg {
@@ -69,7 +105,8 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  border: 2px solid var(--accent);
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-dim);
 }
 
 .profileName {
@@ -80,11 +117,14 @@
 }
 
 .profileTitle {
-  font-size: 0.8rem;
-  color: var(--accent-light);
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  background: var(--accent-dim);
+  padding: 4px 12px;
+  border-radius: 20px;
 }
 
 /* ─── Info Strip ─── */
@@ -106,38 +146,51 @@
 }
 
 a.infoItem:hover {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .infoIcon {
   font-size: 0.85rem;
-  opacity: 0.7;
 }
 
+/* ─── Hero Text ─── */
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 20px;
+  background: var(--accent-dim);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-hover);
+  width: fit-content;
 }
 
 .headline {
-  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-  font-weight: 600;
-  line-height: 1.1;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.08;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  animation: glitch 7s ease infinite;
+}
+
+.headlineAccent {
+  color: var(--accent);
 }
 
 .sub {
   font-size: 1.05rem;
   color: var(--text-secondary);
-  max-width: 480px;
-  margin-bottom: 28px;
-  line-height: 1.75;
+  max-width: 500px;
+  margin-bottom: 32px;
+  line-height: 1.8;
 }
 
 .heroBtns {
@@ -147,40 +200,43 @@ a.infoItem:hover {
 }
 
 .btnPrimary {
-  padding: 12px 28px;
+  padding: 13px 30px;
   background: var(--accent);
   color: #fff;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
-  font-weight: 600;
-  transition: background var(--transition), transform var(--transition);
+  font-weight: 700;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
 }
 
 .btnPrimary:hover {
   background: var(--accent-light);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.38);
 }
 
 .btnSecondary {
-  padding: 12px 28px;
-  border: 1px solid var(--border-hover);
+  padding: 13px 30px;
+  border: 1.5px solid var(--border-hover);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   font-weight: 600;
   transition: border-color var(--transition), color var(--transition),
-    transform var(--transition);
+    transform var(--transition), background var(--transition);
 }
 
 .btnSecondary:hover {
   border-color: var(--accent);
-  color: var(--accent-light);
-  transform: translateY(-1px);
+  color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
 }
 
 /* ─── Sections ─── */
 .section {
-  padding: 80px 24px;
+  padding: 88px 24px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -197,10 +253,11 @@ a.infoItem:hover {
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 40px;
+  color: var(--text-primary);
 }
 
 .sectionHead .sectionTitle {
@@ -209,7 +266,8 @@ a.infoItem:hover {
 
 .seeAll {
   font-size: 0.875rem;
-  color: var(--accent-light);
+  font-weight: 600;
+  color: var(--accent);
   transition: opacity var(--transition);
 }
 
@@ -217,11 +275,9 @@ a.infoItem:hover {
   opacity: 0.7;
 }
 
-/* ─── Project Grid ─── */
+/* ─── Project List ─── */
 .projectGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  display: block;
 }
 
 /* ─── Skills ─── */
@@ -241,7 +297,7 @@ a.infoItem:hover {
   flex-shrink: 0;
   width: 90px;
   padding-top: 5px;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -255,20 +311,20 @@ a.infoItem:hover {
 }
 
 .skillTag {
-  padding: 6px 16px;
-  background: var(--tag-bg);
-  color: var(--tag-text);
+  padding: 5px 15px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   border: 1px solid var(--border);
   border-radius: 20px;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  transition: border-color var(--transition), color var(--transition);
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
 }
 
 .skillTag.core {
   background: var(--accent-dim);
-  border-color: var(--accent);
-  color: var(--accent-light);
+  border-color: var(--border-hover);
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -276,35 +332,86 @@ a.infoItem:hover {
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
 .statCard {
-  padding: 32px 24px;
+  padding: 36px 28px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .statValue {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--accent-light);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--accent);
   letter-spacing: -0.04em;
   margin-bottom: 8px;
+  line-height: 1;
 }
 
 .statLabel {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .statSub {
   font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+/* ─── 타이핑 커서 ─── */
+.cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 300;
+  margin-left: 2px;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ─── 스크롤 리빌 ─── */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(44px) scale(0.97);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fadeUp.inView {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes staffDrift {
+  from { background-position-y: 0; }
+  to   { background-position-y: 29px; }
+}
+
+@keyframes glitch {
+  0%, 85%, 100% { text-shadow: none; transform: none; }
+  86% { text-shadow: -3px 0 #ff0040, 3px 0 #00ffff; transform: translate(-2px) skewX(-1deg); }
+  87% { text-shadow: 3px 0 #ff0040, -3px 0 #00ffff; transform: translate(2px) skewX(1deg); }
+  88% { text-shadow: -2px 0 #ff0040, 2px 0 #00ffff; transform: translate(-1px); }
+  89% { text-shadow: none; transform: none; }
+  91% { text-shadow: 2px 0 #ff0040; transform: translate(1px) skewX(0.5deg); }
+  92% { text-shadow: none; transform: none; }
 }
 
 /* ─── Responsive ─── */
@@ -320,6 +427,11 @@ a.infoItem:hover {
     justify-content: center;
   }
 
+  .hero::after {
+    font-size: 18rem;
+    left: -6%;
+  }
+
   .projectGrid {
     grid-template-columns: 1fr;
   }
@@ -330,13 +442,17 @@ a.infoItem:hover {
 }
 
 @media (max-width: 640px) {
+  .hero::after {
+    display: none;
+  }
+
   .hero {
-    padding: 36px 16px;
+    padding: 40px 16px;
     min-height: auto;
   }
 
   .section {
-    padding: 60px 16px;
+    padding: 64px 16px;
   }
 
   .statsGrid {

@@ -1,67 +1,138 @@
-.card {
+/* ─── 진입 애니메이션 ─── */
+.wrapper {
+  border-bottom: 1px solid var(--border);
+  animation: rowIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
+  animation-delay: calc(var(--index) * 0.08s);
+}
+
+.wrapper:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.wrapper.visible {
+  animation-play-state: running;
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ─── 행 레이아웃 ─── */
+.row {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 28px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  transition: background var(--transition), border-color var(--transition),
-    transform var(--transition), box-shadow var(--transition);
-  position: relative;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 20px 28px 0;
+  border-left: 3px solid transparent;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    padding-left var(--transition);
 }
 
-.card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-3px);
+.row:hover {
+  background: var(--accent-dim);
+  border-left-color: var(--accent);
+  padding-left: 20px;
 }
 
-.card:hover .arrow {
-  transform: translateX(4px);
+/* ─── 왼쪽: 번호 + 제목 + 태그 ─── */
+.left {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 42%;
+  flex-shrink: 0;
 }
 
-.number {
-  font-size: 0.75rem;
-  font-weight: 700;
+.num {
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--accent);
-  letter-spacing: 0.06em;
+  opacity: 0.2;
+  font-family: 'Courier New', monospace;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  flex-shrink: 0;
+  min-width: 40px;
+  transition: opacity var(--transition);
+}
+
+.row:hover .num {
+  opacity: 1;
+}
+
+.meta {
+  min-width: 0;
 }
 
 .title {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
-}
-
-.description {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  flex: 1;
+  margin-bottom: 8px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .tag {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--tag-text);
   background: var(--tag-bg);
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 20px;
   border: 1px solid var(--border);
 }
 
+/* ─── 오른쪽: 설명 ─── */
+.desc {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  min-width: 0;
+}
+
+/* ─── 화살표 ─── */
 .arrow {
   font-size: 1.1rem;
   color: var(--accent);
-  transition: transform var(--transition);
-  align-self: flex-end;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+.row:hover .arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .row {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .desc {
+    padding-left: 60px;
+    width: 100%;
+  }
+
+  .arrow {
+    display: none;
+  }
 }
