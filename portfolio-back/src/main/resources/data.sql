@@ -101,7 +101,7 @@ INSERT INTO tech_skills (id, name, category, show_on_profile) VALUES
 
 -- ─── 9. projects ─────────────────────────────────────────────
 INSERT INTO projects (id, title, description, period, start_date, end_date,
-                      role, implementation_type, lesson, github_url, demo_url, ppt_url) VALUES
+                      role, implementation_type, lesson, github_url, demo_url, ppt_url, order_num) VALUES
 (1, 'CAFE ERP',
     'Spring Boot 기반 카페 통합 관리 시스템. Brity RPA·Python으로 데이터 분석 소요 시간을 60분 → 40초로 단축.',
     '2026.03 – 2026.04', '2026-03-10', '2026-04-30',
