@@ -9,7 +9,7 @@ import Pagination from '../components/common/Pagination'
 import Spinner from '../components/common/Spinner'
 import ErrorMessage from '../components/common/ErrorMessage'
 import { usePagination } from '../hooks/usePagination'
-import { CATEGORY_ORDER } from '../constants'
+import { CATEGORY_ORDER, PROJECT_ORDER } from '../constants'
 import styles from './Home.module.css'
 
 // 타이핑 효과 훅
@@ -84,9 +84,9 @@ export default function Home() {
   const { page: projPage, setPage: setProjPage, totalPages: projTotalPages, slice: pagedProjects } =
     usePagination(
       [...(projects ?? [])].sort((a, b) => {
-        if (!a.title) return -1
-        if (!b.title) return 1
-        return a.title.localeCompare(b.title, 'ko')
+        const ai = PROJECT_ORDER.indexOf(a.id)
+        const bi = PROJECT_ORDER.indexOf(b.id)
+        return (ai === -1 ? -Infinity : ai) - (bi === -1 ? -Infinity : bi)
       }),
       5
     )

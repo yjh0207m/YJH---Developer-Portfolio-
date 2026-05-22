@@ -6,6 +6,7 @@ import ProjectCard from '../components/projects/ProjectCard'
 import Pagination from '../components/common/Pagination'
 import Spinner from '../components/common/Spinner'
 import ErrorMessage from '../components/common/ErrorMessage'
+import { PROJECT_ORDER } from '../constants'
 import styles from './Projects.module.css'
 
 export default function Projects() {
@@ -15,9 +16,9 @@ export default function Projects() {
   const { page, setPage, totalPages, slice: pagedProjects } =
     usePagination(
       [...(projects ?? [])].sort((a, b) => {
-        if (!a.title) return -1
-        if (!b.title) return 1
-        return a.title.localeCompare(b.title, 'ko')
+        const ai = PROJECT_ORDER.indexOf(a.id)
+        const bi = PROJECT_ORDER.indexOf(b.id)
+        return (ai === -1 ? -Infinity : ai) - (bi === -1 ? -Infinity : bi)
       }),
       5
     )
