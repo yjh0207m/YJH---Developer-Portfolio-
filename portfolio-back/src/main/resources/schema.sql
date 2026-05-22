@@ -5,18 +5,18 @@
 
 -- ─── DROP (의존성 역순) ───────────────────────────────────────
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE project_tech_stack;
-DROP TABLE project_metrics;
-DROP TABLE tech_skills;
-DROP TABLE projects;
-DROP TABLE highlights;
-DROP TABLE awards;
-DROP TABLE trainings;
-DROP TABLE careers;
-DROP TABLE certifications;
-DROP TABLE military;
-DROP TABLE education;
-DROP TABLE profile;
+DROP TABLE IF EXISTS project_tech_stack;
+DROP TABLE IF EXISTS project_metrics;
+DROP TABLE IF EXISTS tech_skills;
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS highlights;
+DROP TABLE IF EXISTS awards;
+DROP TABLE IF EXISTS trainings;
+DROP TABLE IF EXISTS careers;
+DROP TABLE IF EXISTS certifications;
+DROP TABLE IF EXISTS military;
+DROP TABLE IF EXISTS education;
+DROP TABLE IF EXISTS profile;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ============================================================
