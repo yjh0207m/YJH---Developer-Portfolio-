@@ -48,9 +48,8 @@ export default function About() {
         {/* Bio */}
         <section className={styles.bio}>
           <h1 className={styles.lead}>
-            기술로 무언가를<br />
-            창작하는 일에<br />
-            매력을 느끼는 개발자
+            기술로 창작하는 일에 <br />
+            큰 매력을 느끼는 개발자
           </h1>
           <div className={styles.bioText}>
             <p>

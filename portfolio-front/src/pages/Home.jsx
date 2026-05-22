@@ -106,9 +106,8 @@ export default function Home() {
               </span>
             </h1>
             <p className={styles.sub}>
-              실용음악과 작곡을 전공하고 개발자가 됐습니다.<br />
-              선율을 설계하듯 코드를 구조화하고, RPA 자동화로<br />
-              60분짜리 업무를 40초로 단축하는 풀스택 개발자입니다.
+              선율을 설계하듯 코드를 안정적이게 구조화하고<br />
+              신기술을 활용하여 빠르게 성과를 보여주는 풀스택 개발자입니다.
             </p>
             <div className={styles.heroBtns}>
               <MagneticBtn>
@@ -145,43 +144,6 @@ export default function Home() {
               <div className={styles.profileTitle}>{profile?.position ?? ''}</div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section
-        ref={projectsRef}
-        className={`${styles.section} ${styles.fadeUp} ${projectsInView ? styles.inView : ''}`}
-      >
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <h2 className={styles.sectionTitle}>Featured Projects</h2>
-            <Link to="/projects" className={styles.seeAll}>전체 보기 →</Link>
-          </div>
-          {loading && <Spinner />}
-          {error && <ErrorMessage message={error.message} />}
-          {projects && (
-            <>
-              <div className={styles.projectGrid}>
-                {pagedProjects.map((p, i) => (
-                  <ProjectCard
-                    key={p.id}
-                    project={p}
-                    index={(projPage - 1) * 5 + i}
-                    inView={projectsInView}
-                  />
-                ))}
-              </div>
-              <Pagination
-                page={projPage}
-                totalPages={projTotalPages}
-                onPageChange={(p) => {
-                  setProjPage(p)
-                  projectsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-              />
-            </>
-          )}
         </div>
       </section>
 
@@ -231,6 +193,43 @@ export default function Home() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Featured Projects */}
+      <section
+        ref={projectsRef}
+        className={`${styles.section} ${styles.fadeUp} ${projectsInView ? styles.inView : ''}`}
+      >
+        <div className={styles.container}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionTitle}>Featured Projects</h2>
+            <Link to="/projects" className={styles.seeAll}>전체 보기 →</Link>
+          </div>
+          {loading && <Spinner />}
+          {error && <ErrorMessage message={error.message} />}
+          {projects && (
+            <>
+              <div className={styles.projectGrid}>
+                {pagedProjects.map((p, i) => (
+                  <ProjectCard
+                    key={p.id}
+                    project={p}
+                    index={(projPage - 1) * 5 + i}
+                    inView={projectsInView}
+                  />
+                ))}
+              </div>
+              <Pagination
+                page={projPage}
+                totalPages={projTotalPages}
+                onPageChange={(p) => {
+                  setProjPage(p)
+                  projectsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }}
+              />
+            </>
+          )}
         </div>
       </section>
     </div>

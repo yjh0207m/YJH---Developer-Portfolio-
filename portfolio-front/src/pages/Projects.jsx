@@ -33,7 +33,7 @@ export default function Projects() {
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>Projects</h1>
-          <p className={styles.sub}>풀스택 · 모바일 · RPA 영역의 프로젝트입니다.</p>
+          <p className={styles.sub}>풀스택 · 모바일 · RPA 프로젝트입니다.</p>
         </header>
 
         {loading && <Spinner />}
