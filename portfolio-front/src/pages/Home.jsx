@@ -82,7 +82,14 @@ export default function Home() {
   const [statsRef, statsInView] = useInView()
 
   const { page: projPage, setPage: setProjPage, totalPages: projTotalPages, slice: pagedProjects } =
-    usePagination(projects ?? [], 5)
+    usePagination(
+      [...(projects ?? [])].sort((a, b) => {
+        if (!a.title) return -1
+        if (!b.title) return 1
+        return a.title.localeCompare(b.title, 'ko')
+      }),
+      5
+    )
 
   return (
     <div className={styles.page}>

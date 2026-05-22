@@ -13,7 +13,14 @@ export default function Projects() {
   const { data: projects, loading, error } = useFetch(api.getProjects)
 
   const { page, setPage, totalPages, slice: pagedProjects } =
-    usePagination(projects ?? [], 5)
+    usePagination(
+      [...(projects ?? [])].sort((a, b) => {
+        if (!a.title) return -1
+        if (!b.title) return 1
+        return a.title.localeCompare(b.title, 'ko')
+      }),
+      5
+    )
 
   function handlePageChange(p) {
     setPage(p)
