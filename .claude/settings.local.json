@@ -13,7 +13,9 @@
       "WebFetch(domain:elasticbeanstalk-ap-southeast-2-168312024432.s3.ap-southeast-2.amazonaws.com)",
       "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\ScrollProgress.jsx\")",
       "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\ScrollProgress.module.css\")",
-      "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\MagneticBtn.jsx\")"
+      "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\MagneticBtn.jsx\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

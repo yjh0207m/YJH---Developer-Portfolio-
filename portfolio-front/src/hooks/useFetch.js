@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-const RETRY_COUNT = 2
-const RETRY_DELAY = 1500
+const RETRY_COUNT = 5
+const RETRY_DELAY = 4000
 
 export function useFetch(fetchFn, deps = []) {
   const [state, setState] = useState({ data: null, loading: true, error: null })
