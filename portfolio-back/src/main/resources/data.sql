@@ -3,19 +3,17 @@
 -- schema.sql 실행 후 사용
 -- ============================================================
 
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE project_tech_stack;
-TRUNCATE TABLE project_metrics;
-TRUNCATE TABLE projects;
-TRUNCATE TABLE tech_skills;
-TRUNCATE TABLE highlights;
-TRUNCATE TABLE awards;
-TRUNCATE TABLE trainings;
-TRUNCATE TABLE certifications;
-TRUNCATE TABLE military;
-TRUNCATE TABLE education;
-TRUNCATE TABLE profile;
-SET FOREIGN_KEY_CHECKS = 1;
+DELETE FROM project_tech_stack;
+DELETE FROM project_metrics;
+DELETE FROM projects;
+DELETE FROM tech_skills;
+DELETE FROM highlights;
+DELETE FROM awards;
+DELETE FROM trainings;
+DELETE FROM certifications;
+DELETE FROM military;
+DELETE FROM education;
+DELETE FROM profile;
 
 -- ─── 1. profile ──────────────────────────────────────────────
 INSERT INTO profile (id, name_ko, name_en, birth_date, gender, nationality,
