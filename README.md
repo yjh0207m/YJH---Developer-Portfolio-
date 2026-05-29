@@ -5,12 +5,28 @@
 
 ---
 
+## 목차
+
+- [스크린샷](#스크린샷)
+- [기술 스택](#기술-스택)
+- [프로젝트 구조](#프로젝트-구조)
+- [로컬 실행 방법](#로컬-실행-방법)
+- [페이지 구성](#페이지-구성)
+- [API 엔드포인트](#api-엔드포인트)
+- [Contact](#contact)
+
+---
+
 ## 스크린샷
 
 ### Home
-| | | |
-|---|---|---|
-| ![Main 1](portfolio-front/public/image/1_Main_1.png) | ![Main 2](portfolio-front/public/image/2_Main_2.png) | ![Main 3](portfolio-front/public/image/3_Main_3.png) |
+| |
+|---|
+| ![Main 1](portfolio-front/public/image/1_Main_1.png) |
+
+| | |
+|---|---|
+| ![Main 2](portfolio-front/public/image/2_Main_2.png) | ![Main 3](portfolio-front/public/image/3_Main_3.png) |
 
 ### Projects
 | | |
