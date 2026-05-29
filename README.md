@@ -1,11 +1,11 @@
-# 유조현 개발자 포트폴리오
+# 🧑‍💻 유조현 개발자 포트폴리오
 
 풀스택 개발자 유조현의 개인 포트폴리오 웹사이트입니다.  
 프로젝트 경험, 기술 스택, 이력 정보를 한곳에서 확인할 수 있습니다.
 
 ---
 
-## 목차
+## 📋 목차
 
 - [스크린샷](#스크린샷)
 - [기술 스택](#기술-스택)
@@ -17,9 +17,9 @@
 
 ---
 
-## 스크린샷
+## 📸 스크린샷
 
-### Home
+### 🏠 Home
 | |
 |---|
 | ![Main 1](portfolio-front/public/image/1_Main_1.png) |
@@ -28,26 +28,26 @@
 |---|---|
 | ![Main 2](portfolio-front/public/image/2_Main_2.png) | ![Main 3](portfolio-front/public/image/3_Main_3.png) |
 
-### Projects
+### 🗂️ Projects
 | | |
 |---|---|
 | ![Projects 1](portfolio-front/public/image/4_Projects_1.png) | ![Projects 2](portfolio-front/public/image/5_Projects_2.png) |
 
-### About
+### 👤 About
 | | | |
 |---|---|---|
 | ![About 1](portfolio-front/public/image/6_About_1.png) | ![About 2](portfolio-front/public/image/7_About_2.png) | ![About 3](portfolio-front/public/image/8_About_3.png) |
 
-### Contact
+### ✉️ Contact
 | |
 |---|
 | ![Contact](portfolio-front/public/image/9_Contact.png) |
 
 ---
 
-## 기술 스택
+## 🛠️ 기술 스택
 
-### Frontend
+### 🖥️ Frontend
 | 분류 | 기술 |
 |---|---|
 | Framework | React 19 |
@@ -56,7 +56,7 @@
 | Email | EmailJS |
 | Language | JavaScript (ES Module) |
 
-### Backend
+### ⚙️ Backend
 | 분류 | 기술 |
 |---|---|
 | Framework | Spring Boot 4.0 |
@@ -67,7 +67,7 @@
 
 ---
 
-## 프로젝트 구조
+## 📁 프로젝트 구조
 
 ```
 YJH---Developer-Portfolio-/
@@ -111,14 +111,14 @@ YJH---Developer-Portfolio-/
 
 ---
 
-## 로컬 실행 방법
+## 🚀 로컬 실행 방법
 
-### 사전 요구사항
+### ✅ 사전 요구사항
 - Java 17+
 - Node.js 18+
 - MariaDB (로컬 또는 원격)
 
-### 1. 데이터베이스 준비
+### 1. 🗄️ 데이터베이스 준비
 
 MariaDB에 `portfolio` 스키마를 생성합니다.
 
@@ -126,7 +126,7 @@ MariaDB에 `portfolio` 스키마를 생성합니다.
 CREATE DATABASE portfolio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### 2. 백엔드 실행
+### 2. ⚙️ 백엔드 실행
 
 `application.properties`의 DB 접속 정보를 환경에 맞게 수정합니다.
 
@@ -145,7 +145,7 @@ cd portfolio-back
 ./mvnw spring-boot:run
 ```
 
-### 3. 프론트엔드 실행
+### 3. 🖥️ 프론트엔드 실행
 
 ```bash
 cd portfolio-front
@@ -159,7 +159,7 @@ npm run dev
 
 ---
 
-## 페이지 구성
+## 🗺️ 페이지 구성
 
 | 경로 | 페이지 | 설명 |
 |---|---|---|
@@ -171,7 +171,7 @@ npm run dev
 
 ---
 
-## API 엔드포인트
+## 🔌 API 엔드포인트
 
 | Method | URL | 설명 |
 |---|---|---|
@@ -186,7 +186,7 @@ Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
-## Contact
+## 📬 Contact
 
 - GitHub: [https://github.com/yjh0207m](https://github.com/yjh0207m)
 - Email: yjh0207m@naver.com
