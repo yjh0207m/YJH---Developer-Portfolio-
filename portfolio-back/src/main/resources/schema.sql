@@ -146,6 +146,7 @@ CREATE TABLE projects (
     github_url          VARCHAR(255)                       COMMENT 'GitHub URL',
     demo_url            VARCHAR(255)                       COMMENT '배포 URL',
     ppt_url             VARCHAR(255)                       COMMENT 'PPT 다운로드 경로',
+    order_num           INT                                COMMENT '표시 순서',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

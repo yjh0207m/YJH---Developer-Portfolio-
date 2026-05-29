@@ -15,7 +15,10 @@
       "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\ScrollProgress.module.css\")",
       "Bash(Remove-Item \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\\\\portfolio-front\\\\src\\\\components\\\\common\\\\MagneticBtn.jsx\")",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\" -Recurse -Directory)",
-      "Bash(Select-Object -ExpandProperty FullName)"
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "WebSearch",
+      "Bash(ls \"C:\\\\Users\\\\3Class_11\\\\Desktop\\\\var\")",
+      "Read(//c/Users/3Class_11/Desktop/var/**)"
     ]
   }
 }

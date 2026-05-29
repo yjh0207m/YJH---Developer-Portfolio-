@@ -99,48 +99,48 @@ INSERT INTO tech_skills (id, name, category, show_on_profile) VALUES
 
 -- ─── 9. projects ─────────────────────────────────────────────
 INSERT INTO projects (id, title, description, period, start_date, end_date,
-                      role, implementation_type, lesson, github_url, demo_url, ppt_url) VALUES
+                      role, implementation_type, lesson, github_url, demo_url, ppt_url, order_num) VALUES
 (1, 'CAFE ERP',
     'Spring Boot 기반 카페 통합 관리 시스템. Brity RPA·Python으로 데이터 분석 소요 시간을 33초로 단축. 재무제표 및 보고서용 대시보드 생성시간을 3분 45초로 단축.',
     '2026.03 – 2026.04', '2026-03-10', '2026-04-30',
     '팀장', '팀협동',
     '팀장으로서 일정 관리, 업무 분담, 원활한 소통과 함께 보안·무결성 등 프로젝트 전반을 꼼꼼히 검증하는 역량이 중요함을 깨달았습니다. OCR, AI 모델, Brity RPA 등 외부 기술 간의 연계가 결과물의 완성도를 좌우한다는 점을 체감했습니다.',
-    'https://github.com/yjh0207m/CAFE_ERP_Project', '', '/ppt/cafe_erp.pdf'),
+    'https://github.com/yjh0207m/CAFE_ERP_Project', '', '/ppt/cafe_erp.pdf', 1),
 
 (2, '새싹 (DateApp)',
     'React Native 기반 데이트 코스 추천 소셜 앱. Firebase 실시간 DB로 채팅 기능 구현. 3방향 스와이프 UI 탐색으로 피드형 매칭 구현. Google Map API 활용 위치 기반 매칭 시도 시스템 구현',
     '2026.01', '2026-01-23', '2026-01-31',
     '단독 개발', '단독',
     'Open API를 활용하며 외부 리소스를 적재적소에 사용하는 것도 개발 역량의 일부임을 깨달았습니다. 또한 단독 작업일수록 탄탄한 사전 설계가 개발 효율을 좌우한다는 점을 체감했습니다.',
-    'https://github.com/yjh0207m/SaeSak', '', NULL),
+    'https://github.com/yjh0207m/SaeSak', '', NULL, 2),
 
 (3, 'Movie Log',
     'React로 구현한 영화 예매 종합 플랫폼. 검색·기록·예매 등의 기본 기능을 제공합니다.',
     '2025.12', '2025-12-02', '2025-12-12',
     '프론트엔드 개발', '팀협동',
     'DB 스키마를 탄탄히 설계할수록 개발 중 시행착오가 줄고 업무 효율이 높아진다는 것을 체감했습니다. 또한 독창적인 컨셉도 중요하지만, 표준화된 디자인 체계 안에서 차별성을 추구하는 것이 더 효과적임을 느꼈습니다.',
-    'https://github.com/PigDuck5390/MovieLog', '', '/ppt/movie_log.pdf'),
+    'https://github.com/PigDuck5390/MovieLog', '', '/ppt/movie_log.pdf', 6),
 
 (4, 'Movie Log 모바일 앱',
     'React Native + Expo로 제작한 모바일 영화 예매 플랫폼. 검색·기록·예매 등의 기본 기능을 제공합니다.',
     '2026.01', '2026-01-15', '2026-01-23',
     '프론트엔드 개발', '팀협동',
     '서비스 개발 시 웹/앱 확장을 고려한 DB 선택이 범용성과 이식성에 큰 영향을 미친다는 것을 깨달았습니다. 최적화된 코드가 개발 속도, 유지 보수성, 처리 성능을 좌우한다는 점을 체감했습니다.',
-    'https://github.com/PigDuck5390/MovieLogApp', '', NULL),
+    'https://github.com/PigDuck5390/MovieLogApp', '', NULL, 5),
 
 (5, '회계 자동화 시스템',
     'Brity RPA를 활용한 회계 업무 자동화 프로젝트. 매출·매입 데이터 자동 집계 및 보고서 자동 생성 프로세스를 구현했습니다.',
     '2026.03', '2026-03-03', '2026-03-10',
     '자동화 개발', '팀협동',
     'RPA 자동화를 통해 반복 업무를 제거하는 것이 실질적인 업무 효율 개선으로 이어진다는 점을 체감했습니다.',
-    '', '', '/ppt/accounting_rpa.pdf'),
+    '', '', '/ppt/accounting_rpa.pdf', 4),
 
 (6, '개발자 포트폴리오',
     'Spring Boot REST API + React 기반 풀스택 개발자 웹 포트폴리오. DB 설계부터 풀스택을 단독으로 개발하여 AWS를 통해 배포하였습니다.',
     '2026.04', '2026-04-01', '2026-04-30',
     '풀스택 개발', '단독',
     '백엔드 및 DB 설계와 프론트엔드 UI를 혼자 구현·연동·배포하며 풀스택 역량과 IaaS 활용 역량을 크게 끌어올렸습니다.',
-    'https://github.com/yjh0207m/YJH---Developer-Portfolio-', '', NULL);
+    'https://github.com/yjh0207m/YJH---Developer-Portfolio-', '', NULL, 3);
 
 -- ─── 10. project_tech_stack ──────────────────────────────────
 -- CAFE ERP: Java, Python, JavaScript, HTML5, CSS3, Spring Boot, Spring Security, MyBatis,
