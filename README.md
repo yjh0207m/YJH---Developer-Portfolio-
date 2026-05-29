@@ -7,17 +7,25 @@
 
 ## 스크린샷
 
-| Home | Projects |
-|---|---|
-| ![Home 1](portfolio-front/public/image/1.%20Home_1.png) | ![Projects](portfolio-front/public/image/3.%20Projects.png) |
+### Home
+| | | |
+|---|---|---|
+| ![Main 1](portfolio-front/public/image/1_Main_1.png) | ![Main 2](portfolio-front/public/image/2_Main_2.png) | ![Main 3](portfolio-front/public/image/3_Main_3.png) |
 
-| Home (Skills · Highlights) | About |
+### Projects
+| | |
 |---|---|
-| ![Home 2](portfolio-front/public/image/2.%20Home_2.png) | ![About](portfolio-front/public/image/4.%20About.png) |
+| ![Projects 1](portfolio-front/public/image/4_Projects_1.png) | ![Projects 2](portfolio-front/public/image/5_Projects_2.png) |
 
-| Contact |
+### About
+| | | |
+|---|---|---|
+| ![About 1](portfolio-front/public/image/6_About_1.png) | ![About 2](portfolio-front/public/image/7_About_2.png) | ![About 3](portfolio-front/public/image/8_About_3.png) |
+
+### Contact
+| |
 |---|
-| ![Contact](portfolio-front/public/image/5.%20Contact.png) |
+| ![Contact](portfolio-front/public/image/9_Contact.png) |
 
 ---
 
@@ -49,13 +57,22 @@
 YJH---Developer-Portfolio-/
 ├── portfolio-front/          # React + Vite 프론트엔드
 │   ├── public/
-│   │   └── ppt/              # PDF 자료 정적 파일
+│   │   ├── image/            # 스크린샷 이미지
+│   │   ├── ppt/              # PDF 발표자료
+│   │   ├── code.png          # 파비콘 소스
+│   │   └── profile.jpg       # 프로필 이미지
 │   └── src/
 │       ├── api/              # API 호출 모듈
-│       ├── components/       # 공통 컴포넌트
-│       ├── hooks/            # useFetch 커스텀 훅
+│       ├── assets/           # 정적 에셋
+│       ├── components/
+│       │   ├── common/       # 공통 컴포넌트 (Nav, Footer 등)
+│       │   └── projects/     # 프로젝트 전용 컴포넌트
+│       ├── constants/        # 상수 정의
+│       ├── hooks/            # 커스텀 훅 (useFetch, useInView 등)
 │       ├── pages/            # 페이지 컴포넌트
-│       └── styles/           # 전역 CSS
+│       ├── styles/           # 전역 CSS
+│       ├── App.jsx
+│       └── main.jsx
 │
 ├── portfolio-back/           # Spring Boot 백엔드
 │   └── src/main/
@@ -67,27 +84,14 @@ YJH---Developer-Portfolio-/
 │       │   ├── repository/   # Spring Data Repository
 │       │   └── service/      # 비즈니스 로직
 │       └── resources/
-│           ├── application.yml
+│           ├── application.properties
+│           ├── application-local.properties
 │           ├── schema.sql    # 테이블 DDL
 │           └── data.sql      # 시드 데이터
 │
-└── 유조현_입사지원서.pdf
+├── README.md
+└── REQUIREMENTS.md
 ```
-
----
-
-## API 엔드포인트
-
-| Method | URL | 설명 |
-|---|---|---|
-| GET | `/api/profile` | 기본 프로필 정보 |
-| GET | `/api/resume` | 학력 · 병역 · 자격증 · 교육 · 수상 |
-| GET | `/api/skills` | 기술 스택 목록 |
-| GET | `/api/highlights` | 홈 Highlights 카드 |
-| GET | `/api/projects` | 프로젝트 목록 |
-| GET | `/api/projects/{id}` | 프로젝트 상세 |
-
-Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
@@ -108,16 +112,15 @@ CREATE DATABASE portfolio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ### 2. 백엔드 실행
 
-`application.yml`의 DB 접속 정보를 환경에 맞게 수정합니다.
+`application.properties`의 DB 접속 정보를 환경에 맞게 수정합니다.
 
-```yaml
-datasource:
-  url: jdbc:mariadb://localhost:3306/portfolio
-  username: root
-  password: (비밀번호)
+```properties
+spring.datasource.url=jdbc:mariadb://localhost:3306/portfolio
+spring.datasource.username=root
+spring.datasource.password=(비밀번호)
 ```
 
-> `sql.init.mode: always` 상태에서 실행하면 schema.sql → data.sql 순서로 자동 실행됩니다.
+> 최초 실행 시 `spring.sql.init.mode=always`로 변경하면 schema.sql → data.sql 순서로 자동 실행됩니다. 이후 `never`로 되돌리세요.
 
 STS 또는 Maven으로 실행합니다.
 
@@ -149,6 +152,21 @@ npm run dev
 | `/projects` | Projects | 프로젝트 카드 목록 |
 | `/projects/:id` | ProjectDetail | 기술스택, 성과지표, 느낀 점, PDF |
 | `/contact` | Contact | EmailJS 기반 이메일 폼 |
+
+---
+
+## API 엔드포인트
+
+| Method | URL | 설명 |
+|---|---|---|
+| GET | `/api/profile` | 기본 프로필 정보 |
+| GET | `/api/resume` | 학력 · 병역 · 자격증 · 교육 · 수상 |
+| GET | `/api/skills` | 기술 스택 목록 |
+| GET | `/api/highlights` | 홈 Highlights 카드 |
+| GET | `/api/projects` | 프로젝트 목록 |
+| GET | `/api/projects/{id}` | 프로젝트 상세 |
+
+Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
