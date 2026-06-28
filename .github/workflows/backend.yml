@@ -40,6 +40,7 @@ jobs:
           mkdir -p deploy
           cp target/portfolio-back-*.jar deploy/app.jar
           printf 'web: java -jar app.jar\n' > deploy/Procfile
+          cp -r .ebextensions deploy/
           cd deploy && zip -r ../deploy.zip .
 
       - name: Set version label
