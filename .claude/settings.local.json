@@ -19,7 +19,10 @@
       "WebSearch",
       "Bash(ls \"C:\\\\Users\\\\3Class_11\\\\Desktop\\\\var\")",
       "Read(//c/Users/3Class_11/Desktop/var/**)",
-      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\" -Force | Select-Object Name, @{Name='Type'; Expression={if \\($_.PSIsContainer\\) { 'Directory' } else { 'File' }}} | Sort-Object Name)"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\3Class_11\\\\git\\\\YJH---Developer-Portfolio-\" -Force | Select-Object Name, @{Name='Type'; Expression={if \\($_.PSIsContainer\\) { 'Directory' } else { 'File' }}} | Sort-Object Name)",
+      "Bash(ls -la portfolio-back/.ebextensions)",
+      "Bash(ls portfolio-back/.platform)",
+      "Bash(find portfolio-back/src -name \"application*.properties\" -o -name \"application*.yml\")"
     ]
   }
 }
