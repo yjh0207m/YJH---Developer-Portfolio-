@@ -40,11 +40,28 @@ function AnimatedRoutes() {
   )
 }
 
+const INTRO_SEEN_KEY = 'yjh-intro-seen'
+
+// 홈으로 첫 진입한 세션에서만 인트로 재생 (재방문·딥링크·모션 감소 설정 시 생략)
+function shouldSkipIntro() {
+  if (window.location.pathname !== '/') return true
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
+  try {
+    return sessionStorage.getItem(INTRO_SEEN_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
 export default function App() {
-  // 페이지 로드마다 인트로 재생 (SPA 내 페이지 이동 시에는 재생 안 함)
-  const [introComplete, setIntroComplete] = useState(false)
+  const [introComplete, setIntroComplete] = useState(shouldSkipIntro)
 
   const handleIntroComplete = useCallback(() => {
+    try {
+      sessionStorage.setItem(INTRO_SEEN_KEY, '1')
+    } catch {
+      // 저장소 접근 불가 시 무시
+    }
     setIntroComplete(true)
   }, [])
 

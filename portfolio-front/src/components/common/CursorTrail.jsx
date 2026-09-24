@@ -7,13 +7,17 @@ export default function CursorTrail() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    // 터치 전용 디바이스에서는 비활성화
+    // 터치 전용 디바이스·모션 감소 설정에서는 비활성화
     if (window.matchMedia('(hover: none)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const container = containerRef.current
     let lastTime = 0
 
     function handleMouseMove(e) {
+      // 본문 가독성을 위해 data-trail 영역(홈 히어로) 위에서만 표시
+      if (!e.target.closest?.('[data-trail]')) return
+
       const now = Date.now()
       if (now - lastTime < 85) return
       lastTime = now

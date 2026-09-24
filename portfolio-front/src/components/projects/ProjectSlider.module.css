@@ -1,0 +1,170 @@
+.head {
+  margin-bottom: 40px;
+}
+
+.head > :first-child {
+  margin-bottom: 0;
+}
+
+/* 카드 그림자·hover 이동이 잘리지 않도록 여백을 확보 */
+.track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 8px 4px 24px;
+  margin: -8px -4px -24px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.slide {
+  flex: 0 0 calc((100% - 24px) / 2);
+  min-width: 0;
+}
+
+/* ─── 하단 점 ─── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 8px;
+  background: var(--border-hover);
+  transition: width var(--transition), background var(--transition);
+}
+
+.dot:hover {
+  background: var(--accent-light);
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.dotActive {
+  width: 22px;
+  background: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .slide {
+    flex-basis: 82%;
+  }
+}
+
+/* ─── 첫 접속 안내 ─── */
+.stage {
+  position: relative;
+}
+
+.hint {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: rgba(13, 28, 18, 0.42);
+  backdrop-filter: blur(1.5px);
+  cursor: pointer;
+  animation: hintIn 0.5s ease both;
+}
+
+/* 터치 기기에서는 안내 아래 카드가 바로 스와이프되도록 통과시킴 */
+@media (hover: none) {
+  .hint {
+    pointer-events: none;
+  }
+}
+
+.hintBox {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: calc(100% - 32px);
+  padding: 16px 26px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 999px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.hintText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.hintText strong {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hintText span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.hintArrow {
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.hintLeft {
+  animation: nudgeLeft 1.4s ease-in-out infinite;
+}
+
+.hintRight {
+  animation: nudgeRight 1.4s ease-in-out infinite;
+}
+
+@keyframes hintIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes nudgeLeft {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(-8px); }
+}
+
+@keyframes nudgeRight {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(8px); }
+}
+
+@media (max-width: 640px) {
+  .hintBox {
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 24px;
+  }
+
+  .hintText span {
+    display: none;
+  }
+}

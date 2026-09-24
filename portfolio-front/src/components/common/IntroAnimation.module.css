@@ -140,3 +140,25 @@
 .authorLine.show {
   opacity: 1;
 }
+
+/* ─── 건너뛰기 ─── */
+.skip {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4d7a60;
+  border: 1px solid #d1fae5;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.skip:hover,
+.skip:focus-visible {
+  color: #16a34a;
+  border-color: #16a34a;
+}

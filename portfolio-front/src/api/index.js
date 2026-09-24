@@ -1,27 +1,27 @@
-const BASE = import.meta.env.VITE_API_BASE_URL ?? '/api'
+import { profile, projects, skills, highlights, resume } from '../data/portfolio'
+import { PROJECT_ORDER } from '../constants'
 
-async function get(path) {
-  const res = await fetch(BASE + path)
-  if (res.status === 404) {
-    const err = new Error('not found')
-    err.status = 404
-    throw err
-  }
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  return res.json()
+const resolve = (data) => Promise.resolve(data)
+
+const rank = (id) => {
+  const i = PROJECT_ORDER.indexOf(id)
+  return i === -1 ? PROJECT_ORDER.length : i
 }
+const sortedProjects = [...projects].sort((a, b) => rank(a.id) - rank(b.id))
 
 export const api = {
-  getProjects: () => get('/projects'),
-  getProject: (id) => get(`/projects/${id}`),
-  getProfile: () => get('/profile'),
-  getResume: () => get('/resume'),
-  getSkills: () => get('/skills'),
-  getHighlights: () => get('/highlights'),
-  contact: (body) =>
-    fetch(`${BASE}/contact`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    }),
+  getProjects: () => resolve(sortedProjects),
+  getProject: (id) => {
+    const project = projects.find((p) => String(p.id) === String(id))
+    if (!project) {
+      const err = new Error('not found')
+      err.status = 404
+      return Promise.reject(err)
+    }
+    return resolve(project)
+  },
+  getProfile: () => resolve(profile),
+  getResume: () => resolve(resume),
+  getSkills: () => resolve(skills),
+  getHighlights: () => resolve(highlights),
 }

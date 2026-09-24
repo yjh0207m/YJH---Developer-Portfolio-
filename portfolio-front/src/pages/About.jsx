@@ -6,6 +6,7 @@ import styles from './About.module.css'
 
 export default function About() {
   const { data: resume, loading } = useFetch(api.getResume)
+  const { data: profile } = useFetch(api.getProfile)
   const timelineRef = useRef(null)
 
   useEffect(() => {
@@ -47,30 +48,64 @@ export default function About() {
       <div className={styles.container}>
         {/* Bio */}
         <section className={styles.bio}>
-          <h1 className={styles.lead}>
-            기술로 창작하는 일에 <br />
-            큰 매력을 느끼는 개발자
-          </h1>
-          <div className={styles.bioText}>
-            <p>
-              음악을 전공하며 작곡과 편곡을 배웠고, 그 경험이 개발로 자연스럽게
-              이어졌습니다. 코드로 무언가를 설계하고 완성해 가는 과정이 창작과
-              닮아 있었기 때문입니다.
-            </p>
-            <p>
-              현재는 Spring Boot와 React를 중심으로 풀스택 역량을 쌓고 있으며,
-              Brity RPA와 Python을 활용한 업무 자동화에도 관심이 깊습니다.
-            </p>
+          <div className={styles.bioMain}>
+            <h1 className={styles.lead}>
+              기술로 창작하는 일에 <br />
+              큰 매력을 느끼는 개발자
+            </h1>
+            <div className={styles.bioText}>
+              <p>
+                음악을 전공하며 작곡과 편곡을 배웠고, 그 경험이 개발로 자연스럽게
+                이어졌습니다. 코드로 무언가를 설계하고 완성해 가는 과정이 창작과
+                닮아 있었기 때문입니다.
+              </p>
+              <p>
+                현재는 Spring Boot와 React를 중심으로 풀스택 역량을 쌓고 있으며,
+                Brity RPA와 Python을 활용한 업무 자동화에도 관심이 깊습니다.
+              </p>
+            </div>
+            <blockquote className={styles.quote}>
+              "게임을 만들고 싶어 GameMaker를 독학하던 중학생이, 언젠가 코드로
+              세상의 반복 작업을 없애는 개발자가 됐습니다."
+            </blockquote>
           </div>
-          <blockquote className={styles.quote}>
-            "게임을 만들고 싶어 GameMaker를 독학하던 중학생이, 언젠가 코드로
-            세상의 반복 작업을 없애는 개발자가 됐습니다."
-          </blockquote>
+
+          {profile && (
+            <aside className={styles.glance}>
+              <h2 className={styles.glanceTitle}>한눈에 보기</h2>
+              <dl className={styles.glanceList}>
+                <div>
+                  <dt>이름</dt>
+                  <dd>{profile.name} ({profile.nameEn})</dd>
+                </div>
+                <div>
+                  <dt>희망 직무</dt>
+                  <dd>{profile.desiredJob}</dd>
+                </div>
+                <div>
+                  <dt>위치</dt>
+                  <dd>{profile.location}</dd>
+                </div>
+                <div>
+                  <dt>이메일</dt>
+                  <dd><a href={`mailto:${profile.email}`}>{profile.email}</a></dd>
+                </div>
+                <div>
+                  <dt>GitHub</dt>
+                  <dd>
+                    <a href={profile.github} target="_blank" rel="noreferrer">
+                      {profile.github.replace('https://', '')}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </aside>
+          )}
         </section>
 
         {/* Education & Military */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Education & Experience</h2>
+          <h2 className={styles.sectionTitle}>학력 및 경력</h2>
           <div className={styles.timeline} ref={timelineRef}>
             {trainings.map((t) => (
               <div key={t.courseName} className={styles.timelineItem}>
@@ -121,7 +156,7 @@ export default function About() {
         {/* Certifications */}
         {certifications.length > 0 && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Certifications</h2>
+            <h2 className={styles.sectionTitle}>자격증</h2>
             <div className={styles.certList}>
               {certifications.map((c) => (
                 <div key={c.name} className={styles.certItem}>
@@ -143,7 +178,7 @@ export default function About() {
         {/* Awards */}
         {awards.length > 0 && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Awards</h2>
+            <h2 className={styles.sectionTitle}>수상 내역</h2>
             <div className={styles.certList}>
               {awards.map((a) => (
                 <div key={a.name} className={styles.certItem}>

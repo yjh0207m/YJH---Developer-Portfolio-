@@ -3,13 +3,12 @@ import { useState, useEffect, useRef } from 'react'
 import { api } from '../api'
 import { useFetch } from '../hooks/useFetch'
 import { useInView } from '../hooks/useInView'
-import ProjectCard from '../components/projects/ProjectCard'
+import ProjectSlider from '../components/projects/ProjectSlider'
 import MagneticBtn from '../components/common/MagneticBtn'
-import Pagination from '../components/common/Pagination'
 import Spinner from '../components/common/Spinner'
 import ErrorMessage from '../components/common/ErrorMessage'
-import { usePagination } from '../hooks/usePagination'
-import { CATEGORY_ORDER, PROJECT_ORDER } from '../constants'
+import { PinIcon, PhoneIcon } from '../components/common/Icons'
+import { CATEGORY_ORDER } from '../constants'
 import styles from './Home.module.css'
 
 // 타이핑 효과 훅
@@ -69,6 +68,27 @@ function StatCard({ value, label, sub, inView }) {
   )
 }
 
+function SkillsSection({ skills }) {
+  return (
+    <div className={styles.skillGroups}>
+      {CATEGORY_ORDER.map((cat) => {
+        const items = skills.filter((s) => s.category === cat)
+        if (items.length === 0) return null
+        return (
+          <div key={cat} className={styles.skillGroup}>
+            <span className={styles.skillGroupLabel}>{cat}</span>
+            <div className={styles.skillTags}>
+              {items.map(({ name }) => (
+                <span key={name} className={`${styles.skillTag} ${styles.core}`}>{name}</span>
+              ))}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function Home() {
   const { data: projects, loading, error } = useFetch(api.getProjects)
   const { data: skills } = useFetch(api.getSkills)
@@ -81,20 +101,10 @@ export default function Home() {
   const [skillsRef, skillsInView] = useInView()
   const [statsRef, statsInView] = useInView()
 
-  const { page: projPage, setPage: setProjPage, totalPages: projTotalPages, slice: pagedProjects } =
-    usePagination(
-      [...(projects ?? [])].sort((a, b) => {
-        const ai = PROJECT_ORDER.indexOf(a.id)
-        const bi = PROJECT_ORDER.indexOf(b.id)
-        return (ai === -1 ? -Infinity : ai) - (bi === -1 ? -Infinity : bi)
-      }),
-      5
-    )
-
   return (
     <div className={styles.page}>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={styles.hero} data-trail>
         <div className={styles.heroInner}>
           <div className={styles.heroText}>
             <p className={styles.eyebrow}>♩ 음악에서 코드로</p>
@@ -120,15 +130,15 @@ export default function Home() {
             <div className={styles.infoStrip}>
               {profile?.location && (
                 <span className={styles.infoItem}>
-                  <span className={styles.infoIcon}>📍</span>
+                  <PinIcon />
                   {profile.location}
                 </span>
               )}
               {profile?.phone && (
-                <span className={styles.infoItem}>
-                  <span className={styles.infoIcon}>📞</span>
+                <a className={styles.infoItem} href={`tel:${profile.phone.replace(/-/g, '')}`}>
+                  <PhoneIcon />
                   {profile.phone}
-                </span>
+                </a>
               )}
             </div>
           </div>
@@ -153,25 +163,31 @@ export default function Home() {
         className={`${styles.section} ${styles.fadeUp} ${skillsInView ? styles.inView : ''}`}
       >
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Skills</h2>
-          <div className={styles.skillGroups}>
-            {CATEGORY_ORDER.map((cat) => {
-              const items = (skills ?? []).filter((s) => s.category === cat)
-              if (items.length === 0) return null
-              return (
-                <div key={cat} className={styles.skillGroup}>
-                  <span className={styles.skillGroupLabel}>{cat}</span>
-                  <div className={styles.skillTags}>
-                    {items.map(({ name }) => (
-                      <span key={name} className={`${styles.skillTag} ${styles.core}`}>
-                        {name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <h2 className={styles.sectionTitle}>기술</h2>
+          {skills && <SkillsSection skills={skills} />}
+        </div>
+      </section>
+      {/* Featured Projects */}
+      <section
+        ref={projectsRef}
+        className={`${styles.section} ${styles.fadeUp} ${projectsInView ? styles.inView : ''}`}
+      >
+        <div className={styles.container}>
+          {projects ? (
+            <ProjectSlider
+              projects={projects}
+              inView={projectsInView}
+              heading={<h2 className={styles.sectionTitle}>주요 프로젝트</h2>}
+            />
+          ) : (
+            <>
+              <div className={styles.sectionHead}>
+                <h2 className={styles.sectionTitle}>주요 프로젝트</h2>
+              </div>
+              {loading && <Spinner />}
+              {error && <ErrorMessage message={error.message} />}
+            </>
+          )}
         </div>
       </section>
 
@@ -181,7 +197,7 @@ export default function Home() {
         className={`${styles.section} ${styles.fadeUp} ${statsInView ? styles.inView : ''}`}
       >
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Highlights</h2>
+          <h2 className={styles.sectionTitle}>주요 성과</h2>
           <div className={styles.statsGrid}>
             {(highlights ?? []).map((s) => (
               <StatCard
@@ -196,42 +212,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section
-        ref={projectsRef}
-        className={`${styles.section} ${styles.fadeUp} ${projectsInView ? styles.inView : ''}`}
-      >
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <h2 className={styles.sectionTitle}>Featured Projects</h2>
-            <Link to="/projects" className={styles.seeAll}>전체 보기 →</Link>
-          </div>
-          {loading && <Spinner />}
-          {error && <ErrorMessage message={error.message} />}
-          {projects && (
-            <>
-              <div className={styles.projectGrid}>
-                {pagedProjects.map((p, i) => (
-                  <ProjectCard
-                    key={p.id}
-                    project={p}
-                    index={(projPage - 1) * 5 + i}
-                    inView={projectsInView}
-                  />
-                ))}
-              </div>
-              <Pagination
-                page={projPage}
-                totalPages={projTotalPages}
-                onPageChange={(p) => {
-                  setProjPage(p)
-                  projectsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-              />
-            </>
-          )}
-        </div>
-      </section>
     </div>
   )
 }

@@ -38,7 +38,7 @@ export default function ProjectDetail() {
 
   const {
     title, period, role, implementationType, techStack,
-    metrics, githubUrl, demoUrl, pptUrl, description, lesson,
+    metrics, githubUrl, demoUrl, pptUrl, description, lesson, images,
   } = project
 
   const summary = description
@@ -71,6 +71,24 @@ export default function ProjectDetail() {
             <span className={styles.metaItem}>{role}</span>
           </div>
         </header>
+
+        {/* Screenshots */}
+        {images?.length > 0 && (
+          <section className={styles.gallery}>
+            <a href={images[0]} target="_blank" rel="noreferrer" className={styles.galleryMain}>
+              <img src={images[0]} alt={`${title} 대표 화면`} />
+            </a>
+            {images.length > 1 && (
+              <div className={styles.galleryGrid}>
+                {images.slice(1).map((src, i) => (
+                  <a key={src} href={src} target="_blank" rel="noreferrer" className={styles.galleryItem}>
+                    <img src={src} alt={`${title} 화면 ${i + 2}`} loading="lazy" />
+                  </a>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Tech Stack grouped */}
         <div className={styles.techGroups}>

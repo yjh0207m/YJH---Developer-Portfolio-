@@ -113,7 +113,17 @@ YJH---Developer-Portfolio-/
 
 ## 🚀 로컬 실행 방법
 
-### ✅ 사전 요구사항
+> ⚠️ 서버 비용 0원 구조로 전환했습니다. 배포본은 `portfolio-front`만 Vercel에 올리며, 데이터는 `portfolio-front/src/data/portfolio.js`의 정적 데이터를 사용합니다.
+> 아래 백엔드(Spring Boot) 실행 방법은 참고용이며 배포에는 사용하지 않습니다.
+
+### ▲ Vercel 배포 (현재 방식)
+1. Vercel에서 GitHub 저장소를 Import
+2. **Root Directory**를 `portfolio-front`로 지정 (Framework: Vite, 자동 인식)
+3. Deploy — 이후 `main` 푸시마다 자동 배포
+
+로컬 실행은 [3. 프론트엔드 실행](#3-️-프론트엔드-실행)만 하면 됩니다.
+
+### ✅ 사전 요구사항 (백엔드 참고용)
 - Java 17+
 - Node.js 18+
 - MariaDB (로컬 또는 원격)

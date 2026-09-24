@@ -30,7 +30,12 @@ export default function IntroAnimation({ onComplete }) {
     const t1 = setTimeout(() => setPhase('transform'), MUSIC_MS)
     const t2 = setTimeout(() => setPhase('exit'),      MUSIC_MS + CODE_MS)
     const t3 = setTimeout(onComplete,                  MUSIC_MS + CODE_MS + EXIT_MS)
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+    const onKey = (e) => { if (e.key === 'Escape' || e.key === 'Enter') onComplete() }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3)
+      window.removeEventListener('keydown', onKey)
+    }
   }, [onComplete])
 
   const isTransform = phase !== 'music'
@@ -73,6 +78,10 @@ export default function IntroAnimation({ onComplete }) {
       <p className={`${styles.authorLine} ${isTransform ? styles.show : ''}`}>
         유조현 포트폴리오
       </p>
+
+      <button type="button" className={styles.skip} onClick={onComplete}>
+        건너뛰기 ›
+      </button>
 
     </div>
   )

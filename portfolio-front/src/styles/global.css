@@ -29,6 +29,7 @@
   --transition:    0.22s ease;
   --nav-height:    64px;
   --max-width:     1100px;
+  --content-width: calc(var(--max-width) - 48px);
 }
 
 html {
@@ -84,4 +85,19 @@ ol {
 
 .page-enter {
   animation: pageEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -12,9 +12,57 @@
 
 /* ─── Bio ─── */
 .bio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 56px;
+  align-items: start;
   margin-bottom: 80px;
   border-bottom: 1px solid var(--border);
   padding-bottom: 80px;
+}
+
+.bioMain {
+  min-width: 0;
+}
+
+.glance {
+  padding: 28px 26px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.glanceTitle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.glanceList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.glanceList dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.glanceList dd {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.glanceList a:hover {
+  color: var(--accent);
 }
 
 .lead {
@@ -153,8 +201,8 @@
 
 /* ─── Certs & Awards ─── */
 .certList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -182,6 +230,17 @@
 }
 
 /* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .bio {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .certList {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .container {
     padding: 60px 16px 0;

@@ -17,7 +17,7 @@ export function useFetch(fetchFn, deps = []) {
         })
         .catch((err) => {
           if (cancelled) return
-          if (remaining > 0) {
+          if (remaining > 0 && err.status !== 404) {
             setTimeout(() => attempt(remaining - 1), RETRY_DELAY)
           } else {
             setState({
